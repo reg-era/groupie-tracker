@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>groupie-tracker</title>
+    <style>
+        .artist-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            max-width: 300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .containt {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Groupie Tracker</h1>
+    <div class="containt">
+        {{range .}}
+        <form action="/getinfo" method="post">
+            <div class="artist-card">
+                <h1>{{.Id}}</h1>
+                <img src="{{.Image}}" alt="{{.Name}}">
+                <h2>{{.Name}}</h2>
+                <p><strong>Members:</strong></p>
+                {{range .Members}}
+                <p>{{.}}</p>
+                {{end}}
+                <p><strong>Creation Year:</strong> {{.CreationDate}}</p>
+                <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
+                <button type="submit"></button>
+            </div>
+        </form>
+        {{end}}
+    </div>
+</body>
+
+</html>
