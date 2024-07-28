@@ -2,12 +2,19 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
 )
 
 const artists = "https://groupietrackers.herokuapp.com/api/artists"
+
+type locatry struct{
+	Id int
+	Locations []string
+	Dates  string
+}
 
 type conutry struct {
 	Id           int      `json:"id"`
@@ -16,16 +23,22 @@ type conutry struct {
 	Members      []string `json:"members"`
 	CreationDate int      `json:"creationDate"`
 	FirstAlbum   string   `json:"firstAlbum"`
-	Locations    string   `json:"locations"`
+	Locations    locatry   `json:"locations"`
 	ConcertDates string   `json:"concertDates"`
 	Relations    string   `json:"relations"`
 }
 
 func main() {
-	body := body()
-
+	body, errr := body()
+	if errr != nil {
+		fmt.Println(errr)
+		return
+	}
 	var conut []conutry
-	err := json.Unmarshal([]byte(body), &conut)
+
+	dec := json.NewDecoder(body)
+	err := dec.Decode(&conut)
+	// err := json.Unmarshal([]byte(body), &conut)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -36,20 +49,15 @@ func main() {
 			conut[i].Id, conut[i].Image, conut[i].Name, strings.Join(conut[i].Members, ", "), conut[i].CreationDate, conut[i].FirstAlbum, conut[i].Locations, conut[i].ConcertDates, conut[i].Relations,
 		)
 	}*/
+	fmt.Println(conut)
 }
 
-func body() string {
+func body() (io.Reader, error) {
 	url, err := http.Get(artists)
 	if err != nil {
 		fmt.Println(err)
-		return ""
+		return nil, errors.New(err.Error())
 	}
-
-	body, err := io.ReadAll(url.Body)
-	if err != nil {
-		fmt.Println(err)
-		return ""
-	}
-
-	return string(body)
+	
+	return url.Body, nil
 }
