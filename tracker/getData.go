@@ -8,24 +8,24 @@ import (
 
 const ArtistsURL = "https://groupietrackers.herokuapp.com/api/artists"
 
-var Data DataValu
+var (
+	Data   []DataValu
+	ArtApi []Api_artists
+)
 
 func GData(i int) {
-	var artApi []Api_artists
 	var loca Api_attits_locatons
 	var coner Api_artists_conertDates
 	var relat Api_artists_relations
 
 	var err error
 
-	err = Decode(&artApi, ArtistsURL)
-
-	err = Decode(&loca, artApi[i-1].Locations)
-	err = Decode(&coner, artApi[i-1].ConcertDates)
-	err = Decode(&relat, artApi[i-1].Relations)
+	err = Decode(&loca, ArtApi[i-1].Locations)
+	err = Decode(&coner, ArtApi[i-1].ConcertDates)
+	err = Decode(&relat, ArtApi[i-1].Relations)
 
 	fmt.Println(
-		artApi[i-1],
+		ArtApi[i-1],
 		"\n\n",
 		loca,
 		"\n\n",
@@ -34,14 +34,12 @@ func GData(i int) {
 		relat,
 	)
 
-	
-
-	Data.Image = artApi[i-1].Image
-	Data.Name = artApi[i-1].Name
+	Data[i-1].Image = ArtApi[i-1].Image
+	Data[i-1].Name = ArtApi[i-1].Name
 
 	if err != nil {
 		fmt.Printf("Error decoding JSON: %v\n", err)
-		return 
+		return
 	}
 }
 

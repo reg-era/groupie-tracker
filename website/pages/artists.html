@@ -6,9 +6,11 @@
     <title>Document</title>
 </head>
 <body>
+    {{range .}}
     <form action="root">
-        <img src="{{.Image}}" alt="Image" width="460" height="345">
+        <img src="{{.Image}}" alt="Image" width="260" height="260">
         <p>{{.Name}}</p>
     </form>
+    {{end}}
 </body>
 </html>

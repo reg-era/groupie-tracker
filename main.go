@@ -30,7 +30,9 @@ func root(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-
-	box.GData(5)
+	err = box.Decode(&box.ArtApi, box.ArtistsURL)
+	for i := 1; i >= 50; i++ {
+		box.GData(i)
+	}
 	tmp.Execute(w, box.Data)
 }
