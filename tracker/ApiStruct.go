@@ -1,11 +1,5 @@
 package box
 
-
-type DataValu struct {
-	Image string
-	Name  string
-}
-
 type Api_attits_locatons struct {
 	Id        int      `json:"id"`
 	Locations []string `json:"locations"`

@@ -8,21 +8,25 @@ import (
 
 const ArtistsURL = "https://groupietrackers.herokuapp.com/api/artists"
 
-var (
-	Data   []DataValu
-	ArtApi []Api_artists
-)
-
 func GData(i int) {
 	var loca Api_attits_locatons
 	var coner Api_artists_conertDates
 	var relat Api_artists_relations
 
-	var err error
+	var ArtApi []Api_artists
 
-	err = Decode(&loca, ArtApi[i-1].Locations)
-	err = Decode(&coner, ArtApi[i-1].ConcertDates)
-	err = Decode(&relat, ArtApi[i-1].Relations)
+	if err := Decode(&loca, ArtApi[i-1].Locations); err != nil {
+		fmt.Println("locations=", err)
+		return
+	}
+	if err := Decode(&coner, ArtApi[i-1].ConcertDates); err != nil {
+		fmt.Println("concertdates=", err)
+		return
+	}
+	if err := Decode(&relat, ArtApi[i-1].Relations); err != nil {
+		fmt.Println("relations", err)
+		return
+	}
 
 	fmt.Println(
 		ArtApi[i-1],
@@ -33,14 +37,6 @@ func GData(i int) {
 		"\n\n",
 		relat,
 	)
-
-	Data[i-1].Image = ArtApi[i-1].Image
-	Data[i-1].Name = ArtApi[i-1].Name
-
-	if err != nil {
-		fmt.Printf("Error decoding JSON: %v\n", err)
-		return
-	}
 }
 
 func Decode(mystruct interface{}, url string) error {
