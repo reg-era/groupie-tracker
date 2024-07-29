@@ -1,63 +1,36 @@
 package main
 
 import (
-	"encoding/json"
-	"errors"
 	"fmt"
-	"io"
+	"html/template"
 	"net/http"
+	"os/exec"
+
+	box "box/tracker"
 )
 
-const artists = "https://groupietrackers.herokuapp.com/api/artists"
-
-type locatry struct{
-	Id int
-	Locations []string
-	Dates  string
-}
-
-type conutry struct {
-	Id           int      `json:"id"`
-	Image        string   `json:"image"`
-	Name         string   `json:"name"`
-	Members      []string `json:"members"`
-	CreationDate int      `json:"creationDate"`
-	FirstAlbum   string   `json:"firstAlbum"`
-	Locations    locatry   `json:"locations"`
-	ConcertDates string   `json:"concertDates"`
-	Relations    string   `json:"relations"`
-}
-
 func main() {
-	body, errr := body()
-	if errr != nil {
-		fmt.Println(errr)
-		return
-	}
-	var conut []conutry
+	open("http://localhost:8080/")
+	http.HandleFunc("/", root)
 
-	dec := json.NewDecoder(body)
-	err := dec.Decode(&conut)
-	// err := json.Unmarshal([]byte(body), &conut)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	/*for i := range conut{
-		fmt.Printf(
-			"Id: %d\nImage: %s\nName: %s\nMembers: %s\nCreationDate: %d\nFirstAlbum: %s\nLocations: %s\nConcertDates: %s\nRelations: %s",
-			conut[i].Id, conut[i].Image, conut[i].Name, strings.Join(conut[i].Members, ", "), conut[i].CreationDate, conut[i].FirstAlbum, conut[i].Locations, conut[i].ConcertDates, conut[i].Relations,
-		)
-	}*/
-	fmt.Println(conut)
+	fmt.Println("Server started on port 8080...")
+	fmt.Println(http.ListenAndServe(":8080", nil))
 }
 
-func body() (io.Reader, error) {
-	url, err := http.Get(artists)
+func open(url string) {
+	err := exec.Command("open", url).Start()
+	if err != nil {
+		println("Error:", err)
+	}
+}
+
+func root(w http.ResponseWriter, r *http.Request) {
+	tmp, err := template.ParseFiles("./website/pages/artists.html")
 	if err != nil {
 		fmt.Println(err)
-		return nil, errors.New(err.Error())
+		return
 	}
-	
-	return url.Body, nil
+
+	box.GData(5)
+	tmp.Execute(w, box.Data)
 }

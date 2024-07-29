@@ -1,3 +1,3 @@
-module main.go
+module box
 
 go 1.22.3
