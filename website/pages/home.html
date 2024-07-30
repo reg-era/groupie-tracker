@@ -29,18 +29,19 @@
     <h1>Groupie Tracker</h1>
     <div class="containt">
         {{range .}}
-        <form action="/getinfo" method="post">
+        <form action="/getinfo" method="POST">
             <div class="artist-card">
-                <h1>{{.Id}}</h1>
+                <input type="hidden" value={{.Id}} name="Art-ID">
+                <h1 name="Art-ID">{{.Id}}</h1>
                 <img src="{{.Image}}" alt="{{.Name}}">
                 <h2>{{.Name}}</h2>
-                <p><strong>Members:</strong></p>
+                <!-- <p><strong>Members:</strong></p>
                 {{range .Members}}
                 <p>{{.}}</p>
-                {{end}}
+                {{end}} -->
                 <p><strong>Creation Year:</strong> {{.CreationDate}}</p>
                 <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
-                <button type="submit"></button>
+                <button type="submit">get more info</button>
             </div>
         </form>
         {{end}}

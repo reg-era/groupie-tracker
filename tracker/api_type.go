@@ -1,29 +1,52 @@
 package tracker
 
 var (
-	Datapls []MRinfo
-	Data    []Artist
-	Api     GTApi
+	Api GTApi
+
+	Artists   []Artist
+	Locations LocationST
+	Dates     DateST
+	Relations RelationST
+	MoreInfos MoreInfo
 )
 
-type GTApi struct {
-	Artists   string `json:"artists"`
-	Locations string `json:"locations"`
-	Dates     string `json:"dates"`
-	Relation  string `json:"relation"`
-}
+type (
+	GTApi struct {
+		Artists   string `json:"artists"`
+		Locations string `json:"locations"`
+		Dates     string `json:"dates"`
+		Relation  string `json:"relation"`
+	}
 
-type Artist struct {
-	Id           int      `json:"id"`
-	Image        string   `json:"image"`
-	Name         string   `json:"name"`
-	Members      []string `json:"members"`
-	CreationDate int      `json:"creationDate"`
-	FirstAlbum   string   `json:"firstAlbum"`
-}
+	Artist struct {
+		Id           int      `json:"id"`
+		Image        string   `json:"image"`
+		Name         string   `json:"name"`
+		Members      []string `json:"members"`
+		CreationDate int      `json:"creationDate"`
+		FirstAlbum   string   `json:"firstAlbum"`
+	}
 
-type MRinfo struct {
-	LocationsCONC []string            `json:"locations"`
-	ConcertDates  []string            `json:"concertDates"`
-	RelationsART  map[string][]string `json:"relations"`
-}
+	LocationST struct {
+		Id        int      `json:"id"`
+		Locations []string `json:"locations"`
+		Dates     string   `json:"dates"`
+	}
+
+	DateST struct {
+		Id    int      `json:"id"`
+		Dates []string `json:"dates"`
+	}
+
+	RelationST struct {
+		Id            int                 `json:"id"`
+		DatesLocation map[string][]string `json:"datesLocations"`
+	}
+
+	MoreInfo struct {
+		Artist
+		LocationST
+		DateST
+		RelationST
+	}
+)

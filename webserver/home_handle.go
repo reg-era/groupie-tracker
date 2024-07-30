@@ -21,7 +21,7 @@ func HomeHandle(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Status Internal Server Error 500", http.StatusInternalServerError)
 		return
 	}
-	err = t.Execute(w, &tracker.Data)
+	err = t.Execute(w, &tracker.Artists)
 	if err != nil {
 		http.Error(w, "Method Not Allowed: error 500", http.StatusInternalServerError)
 		return

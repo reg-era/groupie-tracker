@@ -2,10 +2,10 @@ package tracker
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 func Get_Api_Data(URL string) {
@@ -37,15 +37,15 @@ func Get_Artist_Data(URL string) {
 		log.Fatalf("Error reading response body: %v", err)
 	}
 
-	if err := json.Unmarshal(res, &Data); err != nil {
+	if err := json.Unmarshal(res, &Artists); err != nil {
 		log.Fatalf("Error unmarshalling JSON: %v", err)
 	}
 }
 
-func Get_Artist_MoreData(URLS []string) {
-	for i := 0; i < len(URLS); i++ {
-		req, err := http.Get(URLS[i])
-		fmt.Println(URLS[i])
+func Get_Artist_MoreData(id string) MoreInfo {
+	for i, val := range URLS {
+		// fmt.Println(i+"/"+id, "-----------")
+		req, err := http.Get(i + "/" + id)
 		if err != nil {
 			log.Fatalf("Error fetching data: %v", err)
 		}
@@ -55,9 +55,22 @@ func Get_Artist_MoreData(URLS []string) {
 		if err != nil {
 			log.Fatalf("Error reading response body: %v", err)
 		}
-
-		if err := json.Unmarshal(res, &Datapls); err != nil {
+		if err := json.Unmarshal(res, val); err != nil {
 			log.Fatalf("Error unmarshalling JSON: %v", err)
 		}
+		// fmt.Println(val)
 	}
+	inx, _ := strconv.Atoi(id)
+
+	mr := MoreInfo{
+		Artists[inx],
+		Locations,
+		Dates,
+		Relations,
+	}
+	// fmt.Println()
+	// fmt.Println()
+	// fmt.Println("finish")
+	// fmt.Println(MoreInfos.Artist.Name)
+	return mr
 }
