@@ -18,6 +18,7 @@ func main() {
 
 	log.Println("Serving files on " + port + "...")
 	log.Println("http://localhost" + port + "/")
+
 	err := http.ListenAndServe(port, nil)
 	if err != nil {
 		log.Fatal(err)

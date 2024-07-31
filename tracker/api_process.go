@@ -14,5 +14,4 @@ func APiProcess(url string) {
 		Api.Dates:     &Dates,
 		Api.Relation:  &Relations,
 	}
-	// fmt.Println(Api.Locations)
 }

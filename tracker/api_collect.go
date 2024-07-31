@@ -2,6 +2,7 @@ package tracker
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -42,9 +43,13 @@ func Get_Artist_Data(URL string) {
 	}
 }
 
-func Get_Artist_MoreData(id string) MoreInfo {
+func Get_Artist_MoreData(id string) (MoreInfo, error) {
+	inx, err := strconv.Atoi(id)
+	if err != nil || inx > 52 || inx < 1 {
+		return MoreInfos, fmt.Errorf("500")
+	}
+
 	for i, val := range URLS {
-		// fmt.Println(i+"/"+id, "-----------")
 		req, err := http.Get(i + "/" + id)
 		if err != nil {
 			log.Fatalf("Error fetching data: %v", err)
@@ -58,19 +63,12 @@ func Get_Artist_MoreData(id string) MoreInfo {
 		if err := json.Unmarshal(res, val); err != nil {
 			log.Fatalf("Error unmarshalling JSON: %v", err)
 		}
-		// fmt.Println(val)
 	}
-	inx, _ := strconv.Atoi(id)
 
-	mr := MoreInfo{
-		Artists[inx],
+	return MoreInfo{
+		Artists[inx-1],
 		Locations,
 		Dates,
 		Relations,
-	}
-	// fmt.Println()
-	// fmt.Println()
-	// fmt.Println("finish")
-	// fmt.Println(MoreInfos.Artist.Name)
-	return mr
+	}, nil
 }

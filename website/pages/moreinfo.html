@@ -2,33 +2,46 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{.Artist.Name}}</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{.Artist.Name}}</title>
 </head>
 
 <body>
 	<div>
+		<center><img src="{{.Artist.Image}}" alt="{{.Artist.Name}}" /></center>
 		<h1>Artist</h1>
-		<p><strong>ID:</strong> {{.Artist.Id}}</p>
 		<p><strong>Name:</strong> {{.Artist.Name}}</p>
-		<p><strong>Image:</strong> <img src="{{.Artist.Image}}" alt="{{.Artist.Name}}" /></p>
-		<p><strong>Members:</strong> {{range .Artist.Members}}{{.}} {{end}}</p>
+		<p><strong>ID:</strong> {{.Artist.Id}}</p>
+		<p><strong>Members:</strong> {{range .Artist.Members}}{{.}}, {{end}}</p>
 		<p><strong>Creation Date:</strong> {{.Artist.CreationDate}}</p>
 		<p><strong>First Album:</strong> {{.Artist.FirstAlbum}}</p>
 
 		<h1>Location</h1>
-		<p><strong>Locations:</strong> {{range .LocationST.Locations}}{{.}} {{end}}</p>
-		<p><strong>Dates:</strong> {{.LocationST.Dates}}</p>
-
+		<ul>
+			{{range .LocationST.Locations}}
+			<li>{{.}}</li>
+			{{end}}
+		</ul>
 		<h1>Date</h1>
-		<p><strong>Dates:</strong> {{range .DateST.Dates}}{{.}} {{end}}</p>
+		<ul>
+			{{range .DateST.Dates}}
+			<li>{{.}}</li>
+			{{end}}
+		</ul>
 
 		<h1>Relation</h1>
 		<p><strong>Dates Locations:</strong></p>
 		<ul>
 			{{range $key, $value := .RelationST.DatesLocation}}
-				<li><strong>{{ $key }}:</strong> {{range $value}}{{.}} {{end}}</li>
+			<li><strong>{{ $key }}:</strong>
+				<ul>
+					{{range $value}}
+					<li>{{.}}</li>
+					{{end}}
+				</ul>
+			</li>
+			<br>
 			{{end}}
 		</ul>
 	</div>

@@ -10,10 +10,12 @@ import (
 func HomeHandle(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.Error(w, "Status Not Found 404", http.StatusNotFound)
+		return
 	}
 
 	if r.Method != "GET" {
 		http.Error(w, "Status Method Not Allowed 405", http.StatusMethodNotAllowed)
+		return
 	}
 
 	t, err := template.ParseFiles("./website/pages/home.html")
