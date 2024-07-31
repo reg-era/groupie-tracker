@@ -1,20 +1,30 @@
 package main
 
 import (
-	"fmt"
-	"html/template"
+	"log"
 	"net/http"
 	"os/exec"
 
-	box "box/tracker"
+	"GTapi/tracker"
+	"GTapi/webserver"
 )
 
 func main() {
-	open("http://localhost:8080/")
-	http.HandleFunc("/", root)
+	port := ":8080"
 
-	fmt.Println("Server started on port 8080...")
-	fmt.Println(http.ListenAndServe(":8080", nil))
+	tracker.APiProcess("https://groupietrackers.herokuapp.com/api")
+
+	http.HandleFunc("/", webserver.HomeHandle)
+	http.HandleFunc("/getinfo", webserver.InfoHandle)
+
+	log.Println("Serving files on " + port + "...")
+	log.Println("http://localhost" + port + "/")
+
+	open("http://localhost" + port + "/")
+	err := http.ListenAndServe(port, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func open(url string) {
@@ -22,19 +32,4 @@ func open(url string) {
 	if err != nil {
 		println("Error:", err)
 	}
-}
-
-func root(w http.ResponseWriter, r *http.Request) {
-	tmp, err := template.ParseFiles("./website/pages/artists.html")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	var dataArtist []box.Api_artists
-	if err = box.Decode(&dataArtist, box.ArtistsURL); err != nil{
-		fmt.Println(err)
-		return
-	}
-	
-	tmp.Execute(w, dataArtist)
 }
