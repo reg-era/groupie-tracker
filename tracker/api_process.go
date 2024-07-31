@@ -7,8 +7,9 @@ var URLS = map[string]interface{}{
 }
 
 func APiProcess(url string) {
-	Get_Api_Data(url)
-	Get_Artist_Data(Api.Artists)
+	Get_Api_Data(&Api, url)
+	Get_Api_Data(&Artists, Api.Artists)
+	
 	URLS = map[string]interface{}{
 		Api.Locations: &Locations,
 		Api.Dates:     &Dates,

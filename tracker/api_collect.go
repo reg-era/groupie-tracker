@@ -3,65 +3,44 @@ package tracker
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"log"
 	"net/http"
 	"strconv"
 )
 
-func Get_Api_Data(URL string) {
-	req, err := http.Get(URL)
+func Get_Api_Data(mystruct interface{}, url string) error {
+	resp, err := http.Get(url)
 	if err != nil {
-		log.Fatalf("Error fetching data: %v", err)
+		return fmt.Errorf("failed to get URL: %v", err)
 	}
-	defer req.Body.Close()
+	defer resp.Body.Close()
 
-	res, err := io.ReadAll(req.Body)
-	if err != nil {
-		log.Fatalf("Error reading response body: %v", err)
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("unexpected status code: %d", resp.StatusCode)
 	}
 
-	if err := json.Unmarshal(res, &Api); err != nil {
-		log.Fatalf("Error unmarshalling JSON: %v", err)
+	dec := json.NewDecoder(resp.Body)
+	if err := dec.Decode(mystruct); err != nil {
+		return fmt.Errorf("failed to decode JSON: %v", err)
 	}
+
+	return nil
 }
 
-func Get_Artist_Data(URL string) {
-	req, err := http.Get(URL)
-	if err != nil {
-		log.Fatalf("Error fetching data: %v", err)
-	}
-	defer req.Body.Close()
-
-	res, err := io.ReadAll(req.Body)
-	if err != nil {
-		log.Fatalf("Error reading response body: %v", err)
-	}
-
-	if err := json.Unmarshal(res, &Artists); err != nil {
-		log.Fatalf("Error unmarshalling JSON: %v", err)
-	}
-}
-
-func Get_Artist_MoreData(id string) (MoreInfo, error) {
+func Get_Artist_MoreData(id string) (interface{}, error) {
 	inx, err := strconv.Atoi(id)
 	if err != nil || inx > 52 || inx < 1 {
-		return MoreInfos, fmt.Errorf("500")
+		return nil, fmt.Errorf("500")
 	}
 
 	for i, val := range URLS {
 		req, err := http.Get(i + "/" + id)
 		if err != nil {
-			log.Fatalf("Error fetching data: %v", err)
+			return nil, fmt.Errorf("Error fetching data: %v", err)
 		}
 		defer req.Body.Close()
 
-		res, err := io.ReadAll(req.Body)
-		if err != nil {
-			log.Fatalf("Error reading response body: %v", err)
-		}
-		if err := json.Unmarshal(res, val); err != nil {
-			log.Fatalf("Error unmarshalling JSON: %v", err)
+		if err := json.NewDecoder(req.Body).Decode(val); err != nil {
+			return nil, fmt.Errorf("failed to decode JSON: %v", err)
 		}
 	}
 
