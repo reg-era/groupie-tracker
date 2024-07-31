@@ -28,18 +28,15 @@ type (
 	}
 
 	LocationST struct {
-		Id        int      `json:"id"`
 		Locations []string `json:"locations"`
 		Dates     string   `json:"dates"`
 	}
 
 	DateST struct {
-		Id    int      `json:"id"`
 		Dates []string `json:"dates"`
 	}
 
 	RelationST struct {
-		Id            int                 `json:"id"`
 		DatesLocation map[string][]string `json:"datesLocations"`
 	}
 
