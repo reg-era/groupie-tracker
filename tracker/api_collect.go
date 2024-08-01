@@ -7,8 +7,8 @@ import (
 	"strconv"
 )
 
-func Get_Api_Data(mystruct interface{}, url string) error {
-	resp, err := http.Get(url)
+func Get_Api_Data(mystruct interface{}, url string) error { //my struct holds any data that comes fro mthe webpage
+	resp, err := http.Get(url) //sends a get request to the url
 	if err != nil {
 		return fmt.Errorf("failed to get URL: %v", err)
 	}

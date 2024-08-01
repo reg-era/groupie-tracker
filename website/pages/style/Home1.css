@@ -1,0 +1,71 @@
+
+body, h1, form {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b); 
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    margin: 20px 0;
+}
+
+.containt {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.artist-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    width: 300px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.artist-card img {
+    width: 100%;
+    height: auto;
+}
+
+.artist-card h2 {
+    margin: 15px 0 10px;
+    color: #333;
+}
+
+.artist-card p {
+    margin: 10px;
+    color: #555;
+}
+
+.artist-card button {
+    display: none; 
+}
+
+
+.artist-card:hover {
+    transform: translateY(-10px);
+}
+
+.artist-card form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    opacity: 0;
+}

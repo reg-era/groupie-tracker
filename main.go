@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	port := ":8080"
+	port := ":8000"
 
 	tracker.APiProcess("https://groupietrackers.herokuapp.com/api")
 
