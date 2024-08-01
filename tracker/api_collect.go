@@ -9,8 +9,8 @@ import (
 	"strconv"
 )
 
-func Get_Api_Data(URL string) {
-	req, err := http.Get(URL)
+func Get_Api_Data(info Info) {
+	req, err := http.Get(info.Url)
 	if err != nil {
 		log.Fatalf("Error fetching data: %v", err)
 	}
@@ -21,48 +21,20 @@ func Get_Api_Data(URL string) {
 		log.Fatalf("Error reading response body: %v", err)
 	}
 
-	if err := json.Unmarshal(res, &Api); err != nil {
+	if err := json.Unmarshal(res, info.Data); err != nil {
 		log.Fatalf("Error unmarshalling JSON: %v", err)
 	}
 }
 
-func Get_Artist_Data(URL string) {
-	req, err := http.Get(URL)
-	if err != nil {
-		log.Fatalf("Error fetching data: %v", err)
-	}
-	defer req.Body.Close()
-
-	res, err := io.ReadAll(req.Body)
-	if err != nil {
-		log.Fatalf("Error reading response body: %v", err)
-	}
-
-	if err := json.Unmarshal(res, &Artists); err != nil {
-		log.Fatalf("Error unmarshalling JSON: %v", err)
-	}
-}
-
-func Get_Artist_MoreData(id string) (MoreInfo, error) {
+func Get_Api_MoreData(id string) (MoreInfo, error) {
 	inx, err := strconv.Atoi(id)
 	if err != nil || inx > 52 || inx < 1 {
-		return MoreInfos, fmt.Errorf("500")
+		return MoreInfos, fmt.Errorf("")
 	}
 
 	for i, val := range URLS {
-		req, err := http.Get(i + "/" + id)
-		if err != nil {
-			log.Fatalf("Error fetching data: %v", err)
-		}
-		defer req.Body.Close()
-
-		res, err := io.ReadAll(req.Body)
-		if err != nil {
-			log.Fatalf("Error reading response body: %v", err)
-		}
-		if err := json.Unmarshal(res, val); err != nil {
-			log.Fatalf("Error unmarshalling JSON: %v", err)
-		}
+		url := i + "/" + id
+		Get_Api_Data(Info{url, val})
 	}
 
 	return MoreInfo{
