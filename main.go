@@ -12,7 +12,7 @@ import (
 func main() {
 	port := ":8080"
 
-	tracker.APiProcess("https://groupietrackers.herokuapp.com/api")
+	go tracker.APiProcess("https://groupietrackers.herokuapp.com/api")
 
 	http.HandleFunc("/", webserver.HomeHandle)
 	http.HandleFunc("/getinfo", webserver.InfoHandle)

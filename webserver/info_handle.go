@@ -17,7 +17,7 @@ func InfoHandle(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Status Method Not Allowed 405", http.StatusMethodNotAllowed)
 		return
 	}
-	Data, err := tracker.Get_Artist_MoreData(r.PostFormValue("Art-ID"))
+	 Data, err := tracker.Get_Artist_MoreData(r.PostFormValue("Art-ID"))
 	if err != nil {
 		http.Error(w, "Status Bad Request 400", http.StatusBadRequest)
 		return

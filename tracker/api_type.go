@@ -8,6 +8,7 @@ var (
 	Dates     DateST
 	Relations RelationST
 	MoreInfos MoreInfo
+	URLS  map[string]interface{}
 )
 
 type (
@@ -39,7 +40,7 @@ type (
 	RelationST struct {
 		DatesLocation map[string][]string `json:"datesLocations"`
 	}
-
+//---------------------------------
 	MoreInfo struct {
 		Artist
 		LocationST

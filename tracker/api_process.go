@@ -1,14 +1,14 @@
 package tracker
 
-var URLS = map[string]interface{}{
-	Api.Locations: &Locations,
-	Api.Dates:     &Dates,
-	Api.Relation:  &Relations,
-}
+import "fmt"
 
 func APiProcess(url string) {
-	Get_Api_Data(&Api, url)
-	Get_Api_Data(&Artists, Api.Artists)
+	if err := Get_Api_Data(&Api, url); err != nil{
+		fmt.Printf("failed to get API data: %v", err)
+	}
+	if err := Get_Api_Data(&Artists, Api.Artists); err != nil{
+		fmt.Printf("failed to get API data: %v", err)
+	}
 	
 	URLS = map[string]interface{}{
 		Api.Locations: &Locations,

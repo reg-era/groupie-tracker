@@ -26,16 +26,16 @@ func Get_Api_Data(mystruct interface{}, url string) error {
 	return nil
 }
 
-func Get_Artist_MoreData(id string) (interface{}, error) {
+func Get_Artist_MoreData(id string) (*MoreInfo, error) {
 	inx, err := strconv.Atoi(id)
 	if err != nil || inx > 52 || inx < 1 {
-		return nil, fmt.Errorf("500")
+		return nil, fmt.Errorf("id not founde: %v", inx)
 	}
 
 	for i, val := range URLS {
 		req, err := http.Get(i + "/" + id)
 		if err != nil {
-			return nil, fmt.Errorf("Error fetching data: %v", err)
+			return nil, fmt.Errorf("error fetching data: %v", err)
 		}
 		defer req.Body.Close()
 
@@ -44,7 +44,7 @@ func Get_Artist_MoreData(id string) (interface{}, error) {
 		}
 	}
 
-	return MoreInfo{
+	return &MoreInfo{
 		Artists[inx-1],
 		Locations,
 		Dates,
