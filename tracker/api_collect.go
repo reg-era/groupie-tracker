@@ -31,7 +31,7 @@ func Get_Artist_MoreData(id string) (*MoreInfo, error) {
 	if err != nil || inx > 52 || inx < 1 {
 		return nil, fmt.Errorf("id not founde: %v", inx)
 	}
-
+	URLS := fillurls()
 	for i, val := range URLS {
 		req, err := http.Get(i + "/" + id)
 		if err != nil {

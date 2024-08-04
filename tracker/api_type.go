@@ -7,8 +7,7 @@ var (
 	Locations LocationST
 	Dates     DateST
 	Relations RelationST
-	MoreInfos MoreInfo
-	URLS  map[string]interface{}
+	//URLS  map[string]interface{}
 )
 
 type (
