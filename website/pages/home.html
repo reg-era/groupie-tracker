@@ -60,12 +60,13 @@ h1 {
 
 .artist-card button {
     background-color: rgb(52, 53, 52);
+    width: 250px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     color: #fff;
     cursor: pointer;
-    margin: 20px 0;
-    padding: 10px 20px;
+    margin: 20px;
+    padding: 15px;
     transition: background-color 0.3s;
 }
 
@@ -86,7 +87,7 @@ h1 {
                 <h2>{{.Name}}</h2>
                 <p><strong>Creation Year:</strong> {{.CreationDate}}</p>
                 <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
-                <button type="submit">get more info</button>
+                <center><button type="submit">Get more info</button></center>
             </div>
         </form>
         {{end}}
