@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>groupie-tracker</title>
+    <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/44205180?v=4">
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
     <link rel="stylesheet" href="Home1.css">
 </head>
@@ -74,6 +75,33 @@ h1 {
 .artist-card button:hover {
     background-color: rgb(98, 102, 98);
 }
+
+@media (max-width: 768px) {
+            .artist-card {
+                width: 80%; /* Adjust card width for medium screens */
+                margin: 10px; /* Reduce margin around artist card */
+            }
+
+            .artist-card button {
+                padding: 8px 16px; /* Adjust button padding for better fit */
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 0.875em; /* Further reduce font size for smaller screens */
+            }
+
+            .artist-card {
+                width: 95%; /* Make the artist card almost full width */
+                margin: 5px; /* Further reduce margin for very small screens */
+            }
+
+            .artist-card button {
+                padding: 8px 12px; /* Adjust button padding for very small screens */
+            }
+        }
+    </style>
 
 </style>
 
