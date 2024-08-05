@@ -9,75 +9,76 @@
 </head>
 
 <style>
-    
+    body,
+    h1,
+    form {
+        margin: 0;
+        padding: 0;
+    }
 
-body, h1, form {
-    margin: 0;
-    padding: 0;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background: rgb(52, 53, 52);
+    }
 
-body {
-    font-family: Arial, sans-serif;
-    background: rgb(52, 53, 52); 
-}
+    h1 {
+        text-align: center;
+        color: #fff;
+        margin: 15px 0;
+    }
 
-h1 {
-    text-align: center;
-    color: #fff;
-    margin: 15px 0;
-}
+    .containt {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 
-.containt {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+    .artist-card {
+        background: #fff;
+        border-radius: 10px;
+        margin: 20px;
+        overflow: hidden;
+        transition: transform 0.2s;
+        width: 300px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
 
-.artist-card {
-    background: #fff;
-    border-radius: 10px;
-    margin: 20px;
-    overflow: hidden;
-    transition: transform 0.2s;
-    width: 300px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-}
+    .artist-card img {
+        width: 100%;
+        height: auto;
+    }
 
-.artist-card img {
-    width: 100%;
-    height: auto;
-}
+    .artist-card h2 {
+        color: #333;
+    }
 
-.artist-card h2 {
-    color: #333;
-}
+    .artist-card p {
+        color: #555;
+    }
 
-.artist-card p {
-    color: #555;
-}
+    .artist-card button {
+        background-color: rgb(52, 53, 52);
+        width: 250px;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
+        margin: 20px;
+        padding: 15px;
+        transition: background-color 0.3s;
+    }
 
-.artist-card button {
-    background-color: rgb(52, 53, 52);
-    width: 250px;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-    margin: 20px;
-    padding: 15px;
-    transition: background-color 0.3s;
-}
-
-.artist-card button:hover {
-    background-color: rgb(98, 102, 98);
-}
-
+    .artist-card button:hover {
+        background-color: rgb(98, 102, 98);
+    }
 </style>
 
 <body>
-    <h1><center>Groupie Tracker</center></h1>
+    <h1>
+        <center>Groupie Tracker</center>
+    </h1>
     <div class="containt">
         {{range .}}
         <form action="/getinfo" method="POST">

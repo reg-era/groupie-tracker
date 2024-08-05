@@ -4,21 +4,26 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="{{.Artist.Image}}">
 	<title>{{.Artist.Name}}</title>
 </head>
 <style>
-	body, h1, form {
-    margin: 0;
-    padding: 0;
-}
-body {
-    font-family: Arial, sans-serif;
-    background: rgb(52, 53, 52); 
-	color: white;
-	justify-content: center;
-	display: flex;
-}
+	body,
+	h1,
+	form {
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		font-family: Arial, sans-serif;
+		background: rgb(52, 53, 52);
+		color: white;
+		justify-content: center;
+		display: flex;
+	}
 </style>
+
 <body>
 	<div>
 		<center><img src="{{.Artist.Image}}" alt="{{.Artist.Name}}" /></center>

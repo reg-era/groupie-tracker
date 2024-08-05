@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-// fetch data from Url and
+// fetch data from Url and give the struct to reload
 func Get_Api_Data(info Info) {
 	// get respons from api
 	req, err := http.Get(info.Url)

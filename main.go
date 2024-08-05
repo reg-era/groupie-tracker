@@ -3,17 +3,18 @@ package main
 import (
 	"log"
 	"net/http"
-	"os/exec"
 
 	"GTapi/tracker"
 	"GTapi/webserver"
 )
 
+var API = "https://groupietrackers.herokuapp.com/api"
+
 func main() {
 	port := ":8080"
-	
+
 	// fetch the Api content
-	tracker.APiProcess("https://groupietrackers.herokuapp.com/api")
+	tracker.APiProcess(API)
 
 	// handle web functions
 	http.HandleFunc("/", webserver.HomeHandle)
@@ -26,12 +27,5 @@ func main() {
 	err := http.ListenAndServe(port, nil)
 	if err != nil {
 		log.Fatal(err)
-	}
-}
-
-func open(url string) {
-	err := exec.Command("open", url).Start()
-	if err != nil {
-		println("Error:", err)
 	}
 }
