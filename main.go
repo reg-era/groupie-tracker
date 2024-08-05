@@ -8,6 +8,8 @@ import (
 	"GTapi/webserver"
 )
 
+//  Google map API KEY = AIzaSyCCTAVP5kfJGMAH2KoX8qo-n7r90Iosbjg
+
 var API = "https://groupietrackers.herokuapp.com/api"
 
 func main() {
