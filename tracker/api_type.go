@@ -8,6 +8,7 @@ var (
 	Locations LocationST
 	Dates     DateST
 	Relations RelationST
+	Map       []MapLoc
 )
 
 // make DataStruct type to use in fetching
@@ -41,12 +42,20 @@ type (
 	RelationST struct {
 		DatesLocation map[string][]string `json:"datesLocations"`
 	}
+	// map
+	MapLoc struct {
+		lat   float64
+		lng   float64
+		title string
+	}
 
 	// MoreInfo herite from the previous struct the necessary type
 	MoreInfo struct {
 		Artist
-		LocationST
 		DateST
 		RelationST
+		LocationST
+		// For GeoMap
+		MapLoc
 	}
 )
