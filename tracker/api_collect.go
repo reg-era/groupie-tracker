@@ -28,11 +28,11 @@ func Get_Api_Data(info Info) {
 	}
 }
 
-func Get_Api_MoreData(id string) (MoreInfo, error) {
+func Get_Api_MoreData(id string) (*MoreInfo, error) {
 	// convert the Id to number for seraching in data
 	inx, err := strconv.Atoi(id)
 	if err != nil || inx > 52 || inx < 1 {
-		return MoreInfos, fmt.Errorf("")
+		return nil, fmt.Errorf("")
 	}
 	// fetch for each Data the Api provide i is the Url and val is Data
 	for i, val := range URLS {
@@ -40,7 +40,7 @@ func Get_Api_MoreData(id string) (MoreInfo, error) {
 		Get_Api_Data(Info{url, val}) // fetching Data
 	}
 	// return the morinfo data for a specific artist and nil err
-	return MoreInfo{
+	return &MoreInfo{
 		Artists[inx-1],
 		Locations,
 		Dates,

@@ -8,7 +8,6 @@ var (
 	Locations LocationST
 	Dates     DateST
 	Relations RelationST
-	MoreInfos MoreInfo
 )
 
 // make DataStruct type to use in fetching

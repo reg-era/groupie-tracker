@@ -13,8 +13,8 @@ var API = "https://groupietrackers.herokuapp.com/api"
 func main() {
 	port := ":8080"
 
-	// fetch the Api content
-	tracker.APiProcess(API)
+	// fetch the Api content in another routine
+	go tracker.APiProcess(API)
 
 	// handle web functions
 	http.HandleFunc("/", webserver.HomeHandle)
