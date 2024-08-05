@@ -14,7 +14,7 @@ func Get_Api_Data(info Info) {
 	// get respons from api
 	req, err := http.Get(info.Url)
 	if err != nil {
-		log.Fatalf("Error fetching data: %v", err)
+		log.Fatalf("failed to get URL: %v", err)
 	}
 	defer req.Body.Close()
 	// read the respons body
