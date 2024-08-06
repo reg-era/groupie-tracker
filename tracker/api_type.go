@@ -44,9 +44,9 @@ type (
 	}
 	// map
 	MapLoc struct {
-		lat   float64
-		lng   float64
-		title string
+		Lat   float64 `json:"lat"`
+		Lng   float64 `json:"lng"`
+		Title string  `json:"title"`
 	}
 
 	// MoreInfo herite from the previous struct the necessary type
@@ -54,8 +54,6 @@ type (
 		Artist
 		DateST
 		RelationST
-		LocationST
-		// For GeoMap
-		MapLoc
+		GoogleMap string
 	}
 )
