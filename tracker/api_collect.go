@@ -2,15 +2,15 @@ package tracker
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
-	"strconv"
+	"sync"
 )
 
 // fetch data from Url and give the struct to reload
-func Get_Api_Data(info Info) {
+func Get_Api_Data(info Info, artist chan<- []interface{}, wg *sync.WaitGroup) {
+	defer wg.Done()
 	// get respons from api
 	req, err := http.Get(info.Url)
 	if err != nil {
@@ -28,22 +28,22 @@ func Get_Api_Data(info Info) {
 	}
 }
 
-func Get_Api_MoreData(id string) (*MoreInfo, error) {
-	// convert the Id to number for seraching in data
-	inx, err := strconv.Atoi(id)
-	if err != nil || inx > 52 || inx < 1 {
-		return nil, fmt.Errorf("")
-	}
-	// fetch for each Data the Api provide i is the Url and val is Data
-	for i, val := range URLS {
-		url := i + "/" + id
-		Get_Api_Data(Info{url, val}) // fetching Data
-	}
-	// return the morinfo data for a specific artist and nil err
-	return &MoreInfo{
-		Artists[inx-1],
-		Locations,
-		Dates,
-		Relations,
-	}, nil
-}
+// func Get_Api_MoreData(id string){
+// 	// convert the Id to number for seraching in data
+// 	inx, err := strconv.Atoi(id)
+// 	// if err != nil || inx > 52 || inx < 1 {
+// 	// 	return nil, fmt.Errorf("")
+// 	// }
+// 	// fetch for each Data the Api provide i is the Url and val is Data
+// 	for i, val := range URLS {
+// 		url := i + "/" + id
+// 		Get_Api_Data(Info{url, val}) // fetching Data
+// 	}
+// 	// return the morinfo data for a specific artist and nil err
+// 	return &MoreInfo{
+// 		Artists[inx-1],
+// 		Locations,
+// 		Dates,
+// 		Relations,
+// 	}, nil
+// }

@@ -18,12 +18,12 @@ func InfoHandle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Get form TrackerServer Data to serve using the ID
-	Data, err := tracker.Get_Api_MoreData(r.PostFormValue("Art-ID"))
-	if err != nil {
-		http.Error(w, "Status Bad Request 400", http.StatusBadRequest)
-		return
-	}
+	// // Get form TrackerServer Data to serve using the ID
+	// Data, err := tracker.Get_Api_MoreData(r.PostFormValue("Art-ID"))
+	// if err != nil {
+	// 	http.Error(w, "Status Bad Request 400", http.StatusBadRequest)
+	// 	return
+	// }
 
 	// parse the web page template
 	t, err := template.ParseFiles("./website/pages/moreinfo.html")
@@ -32,7 +32,7 @@ func InfoHandle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// execute the templat on web page with the data serve
-	err = t.Execute(w, Data)
+	err = t.Execute(w, &tracker.Artists)
 	if err != nil {
 		http.Error(w, "Method Not Allowed: error 500", http.StatusInternalServerError)
 		return
