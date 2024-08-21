@@ -16,6 +16,9 @@ func main() {
 	// fetch the Api content in another routine
 	go tracker.APiProcess(API)
 
+	// serving style
+	http.Handle("/style/", http.StripPrefix("/style/", http.FileServer(http.Dir("./website/style/"))))
+
 	// handle web functions
 	http.HandleFunc("/", webserver.HomeHandle)
 	http.HandleFunc("/getinfo", webserver.InfoHandle)
