@@ -16,14 +16,46 @@
     </h1>
     <div class="containt">
         {{range .}}
-        <form action="/getinfo" method="POST">
+        <form action="/" method="POST">
             <div class="artist-card">
-                <input type="hidden" value={{.Id}} name="Art-ID">
                 <img src="{{.Image}}" alt="{{.Name}}">
                 <h2>{{.Name}}</h2>
                 <p><strong>Creation Year:</strong> {{.CreationDate}}</p>
                 <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
                 <center><button type="submit">Get more info</button></center>
+                <!-- ------------------------------div to hide------------------------------- -->
+                 <div>
+                    <p><strong>ID:</strong> {{.Id}}</p>
+                    <p><strong>Members:</strong> {{range .Members}}{{.}}, {{end}}</p>
+    
+                    <h1>Location</h1>
+                    <ul>
+                        {{range .LocationST.Locations}}
+                        <li>{{.}}</li>
+                        {{end}}
+                    </ul>
+                
+                    <h1>Date</h1>
+                    <ul>
+                        {{range .DateST.Dates}}
+                        <li>{{.}}</li>
+                        {{end}}
+                    </ul>
+                
+                    <h1>Relation</h1>
+                    <ul>
+                        {{range $key, $value := .RelationST.DatesLocation}}
+                        <li><strong>{{ $key }}:</strong>
+                            <ul>
+                                {{range $value}}
+                                <li>{{.}}</li>
+                                {{end}}
+                            </ul>
+                        </li>
+                        {{end}}
+                    </ul>
+                </div>
+                <!-- ---------------------------------------------------------- -->
             </div>
         </form>
         {{end}}

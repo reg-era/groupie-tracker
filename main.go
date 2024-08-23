@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"sync"
 	"time"
 
 	"GTapi/tracker"
@@ -14,20 +15,21 @@ var API = "https://groupietrackers.herokuapp.com/api"
 
 func main() {
 	start := time.Now()
+	var wg sync.WaitGroup
 	port := ":8080"
 
 	// fetch the Api content in another routine
-	go tracker.APiProcess(API)
+	wg.Add(1)
+	go tracker.APiProcess(&wg, API)
 
 	// serving style
 	http.Handle("/style/", http.StripPrefix("/style/", http.FileServer(http.Dir("./website/style/"))))
 
 	// handle web functions
 	http.HandleFunc("/", webserver.HomeHandle)
-	http.HandleFunc("/getinfo", webserver.InfoHandle)
 
+	wg.Wait()
 	fmt.Println("time :", time.Since(start))
-	return
 
 	log.Println("Serving files on " + port + "...")
 	log.Println("http://localhost" + port + "/")
