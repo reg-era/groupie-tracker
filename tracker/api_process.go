@@ -48,3 +48,19 @@ func APiProcess(url string) {
 	}(&Stat)
 	wgp.Wait()
 }
+
+// example of searching for data :
+// https://maps.googleapis.com/maps/api/geocode/json?address=mozanbiq&key=AIzaSyCCTAVP5kfJGMAH2KoX8qo-n7r90Iosbjg
+
+// truct that we need :
+// MapLocalisation struct {
+// 	Lat   float64 `json:"lat"`
+// 	Lng   float64 `json:"lng"`
+// 	Title string  `json:"title"`
+// }
+
+// function that serch locations :
+// func Get_Map_Coordinates(address string) {
+// 	url := fmt.Sprintf("https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s", address, API_KEY)
+// 	Get_Api_Data(Info{url, &MapLoc{}})
+// }
