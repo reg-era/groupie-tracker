@@ -31,3 +31,7 @@ func HomeHandle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+// add func SearchHandele(&tracker.Artists) Artists
+
+// add func FilterHandele(&tracker.Artists) Artists

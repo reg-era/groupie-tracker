@@ -12,6 +12,11 @@
 
 <body>
     <h1>Groupie Tracker</h1>
+    
+    <!-- addind div for search bar -->
+
+    <!-- adding div for filter bar -->
+
     <div class="containt">
         {{range .}}
             <div class="artist-card">
@@ -26,6 +31,7 @@
                 <div class="moreinfo" id="moreinfo-{{.Id}}">
                     <p><strong>Members:</strong> {{range .Members}}{{.}}, {{end}}</p>
                     
+                    <!-- integrat the google map to view the localisation -->
                     <p><strong>Location:</strong>{{range .LocationST.Locations}} {{.}},{{end}}</p>
                     
                     <p><strong>Date:</strong>{{range .DateST.Dates}} {{.}},{{end}}</p>
