@@ -4,10 +4,7 @@ package tracker
 var (
 	Api GTApi
 
-	Artists   []Artist
-	Locations LocationST
-	Dates     DateST
-	Relations RelationST
+	Artists []Artist
 )
 
 // make DataStruct type to use in fetching
@@ -27,26 +24,18 @@ type (
 		Members      []string `json:"members"`
 		CreationDate int      `json:"creationDate"`
 		FirstAlbum   string   `json:"firstAlbum"`
-	}
-	// fetching location
-	LocationST struct {
-		Locations []string `json:"locations"`
-		Dates     string   `json:"dates"`
-	}
-	// fetching date
-	DateST struct {
-		Dates []string `json:"dates"`
-	}
-	// fetching the relation
-	RelationST struct {
-		DatesLocation map[string][]string `json:"datesLocations"`
-	}
-
-	// MoreInfo herite from the previous struct the necessary type
-	MoreInfo struct {
-		Artist
-		LocationST
-		DateST
-		RelationST
+		// fetching location
+		LocationST struct {
+			Locations []string `json:"locations"`
+			Dates     string   `json:"dates"`
+		}
+		// fetching date
+		DateST struct {
+			Dates []string `json:"dates"`
+		}
+		// fetching the relation
+		RelationST struct {
+			DatesLocation map[string][]string `json:"datesLocations"`
+		}
 	}
 )
