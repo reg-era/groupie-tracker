@@ -1,76 +1,93 @@
-body,
-h1,
-form {
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Macondo&display=swap');
+
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Macondo';    
 }
+
+:root {
+    --bg-color: rgb(3, 0, 28);
+    --card-bg: rgb(48, 30, 103);
+    --text-primary: rgb(182, 234, 218);
+    --text-secondary: rgb(182, 234, 218);
+    --button-hover-bg:rgb(65, 46, 120);
+    --border-radius: 8px;
+    --transition-time: 0.3s;
+}
+
 body {
-    font-family: 'JetBrains Mono';
-    font-size: 1em;
-    background: rgb(0, 0, 0);
+    font-size: 22px;
+    background: var(--bg-color);
+    color: var(--text-secondary);
 }
+
 h1 {
+    color: var(--text-primary);
+    margin: 20px 0;
     text-align: center;
-    color: #fff;
-    margin: 15px 0;
 }
+
 .containt {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 20px;
+    padding: 20px;
 }
+
 .artist-card {
-    background: #fff;
-    border-radius: 10px;
-    margin: 20px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--text-primary);
+    box-shadow: 0 4px 8px var(--text-secondary);
     overflow: hidden;
-    transition: transform 0.2s;
     width: 300px;
     text-align: center;
     display: flex;
     flex-direction: column;
+    transition: transform var(--transition-time);
 }
+
+.artist-card:hover {
+    transform: scale(1.05);
+}
+
 .artist-card img {
-    width: 100%;
+    margin-top: 15px;
+    width: 50%;
     height: auto;
+    border-radius: 50%;
 }
+
 .artist-card h2 {
-    color: #333;
+    color: var(--text-primary);
+    margin: 10px 0;
 }
+
 .artist-card p {
-    color: #555;
+    color: var(--text-secondary);
+    margin: 10px 0;
 }
+
 .artist-card button {
-    background-color: rgb(52, 53, 52);
+    background-color: var(--bg-color);
     border: none;
-    border-radius: 5px;
-    color: #fff;
+    border-radius: var(--border-radius);
+    color: var(--text-primary);
     cursor: pointer;
-    margin: 20px 0;
+    margin: 20px;
     padding: 10px 20px;
-    transition: background-color 0.3s;
+    transition: background-color var(--transition-time);
 }
+
 .artist-card button:hover {
-    background-color: rgb(98, 102, 98);
+    background-color: var(--button-hover-bg);
 }
-@media (max-width: 768px) {
-    .artist-card {
-        width: 80%;
-        margin: 10px;
-    }
-    .artist-card button {
-        padding: 8px 16px;
-    }
-}
-@media (max-width: 480px) {
-    body {
-        font-size: 0.875em;
-    }
-    .artist-card {
-        width: 95%;
-        margin: 5px;
-    }
-    .artist-card button {
-        padding: 8px 12px;
-    }
+
+.moreinfo {
+    display: none;
+    margin: 15px;
+    font-size: 16px;
 }

@@ -11,55 +11,48 @@
 </head>
 
 <body>
-    <h1>
-        <center>Groupie Tracker</center>
-    </h1>
+    <h1>Groupie Tracker</h1>
     <div class="containt">
         {{range .}}
-        <form action="/" method="POST">
             <div class="artist-card">
-                <img src="{{.Image}}" alt="{{.Name}}">
-                <h2>{{.Name}}</h2>
-                <p><strong>Creation Year:</strong> {{.CreationDate}}</p>
-                <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
-                <center><button type="submit">Get more info</button></center>
-                <!-- ------------------------------div to hide------------------------------- -->
-                 <div>
-                    <p><strong>ID:</strong> {{.Id}}</p>
-                    <p><strong>Members:</strong> {{range .Members}}{{.}}, {{end}}</p>
-    
-                    <h1>Location</h1>
-                    <ul>
-                        {{range .LocationST.Locations}}
-                        <li>{{.}}</li>
-                        {{end}}
-                    </ul>
-                
-                    <h1>Date</h1>
-                    <ul>
-                        {{range .DateST.Dates}}
-                        <li>{{.}}</li>
-                        {{end}}
-                    </ul>
-                
-                    <h1>Relation</h1>
-                    <ul>
-                        {{range $key, $value := .RelationST.DatesLocation}}
-                        <li><strong>{{ $key }}:</strong>
-                            <ul>
-                                {{range $value}}
-                                <li>{{.}}</li>
-                                {{end}}
-                            </ul>
-                        </li>
-                        {{end}}
-                    </ul>
+                <div class="basicinfo" id="basicinfo-{{.Id}}">
+                    <img src="{{.Image}}" alt="{{.Name}}">
+                    <h2>{{.Name}}</h2>
+                    <p>{{.Id}}</p>
+                    <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
+                    <p><strong>Creation Year:</strong> {{.CreationDate}}</p>
+                    <center><button type="button" onclick="toggleInfo('{{.Id}}')">show info</button></center>
                 </div>
-                <!-- ---------------------------------------------------------- -->
+                <div class="moreinfo" id="moreinfo-{{.Id}}">
+                    <p><strong>Members:</strong> {{range .Members}}{{.}}, {{end}}</p>
+                    
+                    <p><strong>Location:</strong>{{range .LocationST.Locations}} {{.}},{{end}}</p>
+                    
+                    <p><strong>Date:</strong>{{range .DateST.Dates}} {{.}},{{end}}</p>
+                    
+                    <p><strong>Relation: {</strong>{{range $key, $value := .RelationST.DatesLocation}}<strong>{{ $key }}:</strong>{{range $value}} {{.}},{{end}}{{end}}}</p>
+
+                    <center><button type="button" onclick="toggleInfo('{{.Id}}')">hide info</button></center>
+                </div>
             </div>
-        </form>
         {{end}}
     </div>
+
+    <script>
+        function toggleInfo(id) {
+            var basicInfoDiv = document.getElementById('basicinfo-' + id);
+            var moreInfoDiv = document.getElementById('moreinfo-' + id);
+
+            if (basicInfoDiv.style.display === 'none') {
+                basicInfoDiv.style.display = 'block';
+                moreInfoDiv.style.display = 'none';
+            } else {
+                basicInfoDiv.style.display = 'none';
+                moreInfoDiv.style.display = 'block';
+            }
+        }
+    </script>
 </body>
+
 
 </html>
