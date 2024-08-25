@@ -1,22 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>groupie-tracker</title>
+    <title>Groupie Tracker</title>
     <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/44205180?v=4">
-    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=JetBrains+Mono' rel='stylesheet'>
     <link rel="stylesheet" href="style/home.css">
 </head>
 
 <body>
     <h1>Groupie Tracker</h1>
-    
-    <!-- addind div for search bar -->
 
-    <!-- adding div for filter bar -->
-
+    <div class="search">
+        <form action="/" method="post">
+            <input list="search-bar" id="search" name="search" />
+            <datalist id="search-bar">
+                {{range .}}
+                    <option value="{{.Name}} - artist/band" reel-value="{{.Id}}"></option>
+                    {{range .Members}}
+                        <option value="{{.}} - members" reel-value="{{.Id}}"></option>
+                    {{end}}
+                    {{range .LocationST.Locations}}
+                        <option value="{{.}} - locations" reel-value="{{.Id}}"></option>
+                    {{end}}
+                    <option value="{{.FirstAlbum}} - first album date" reel-value="{{.Id}}"></option>
+                    <option value="{{.CreationDate}} - creation date" reel-value="{{.Id}}"></option>
+                {{end}}
+            </datalist>
+            <input type="hidden" id="selected-id" name="selected-id" />
+            <button type="submit">🔍</button>
+        </form>
+    </div>
     <div class="containt">
         {{range .}}
             <div class="artist-card">
@@ -26,39 +42,46 @@
                     <p>{{.Id}}</p>
                     <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
                     <p><strong>Creation Year:</strong> {{.CreationDate}}</p>
-                    <center><button type="button" onclick="toggleInfo('{{.Id}}')">show info</button></center>
+                    <center><button type="button" onclick="toggleInfo('{{.Id}}')">Show Info</button></center>
                 </div>
-                <div class="moreinfo" id="moreinfo-{{.Id}}">
+                <div class="moreinfo" id="moreinfo-{{.Id}}" style="display: none;">
                     <p><strong>Members:</strong> {{range .Members}}{{.}}, {{end}}</p>
-                    
-                    <!-- integrat the google map to view the localisation -->
-                    <p><strong>Location:</strong>{{range .LocationST.Locations}} {{.}},{{end}}</p>
-                    
-                    <p><strong>Date:</strong>{{range .DateST.Dates}} {{.}},{{end}}</p>
-                    
-                    <p><strong>Relation: {</strong>{{range $key, $value := .RelationST.DatesLocation}}<strong>{{ $key }}:</strong>{{range $value}} {{.}},{{end}}{{end}}}</p>
-
-                    <center><button type="button" onclick="toggleInfo('{{.Id}}')">hide info</button></center>
+                    <!-- Integrate Google Map to view the location -->
+                    <p><strong>Location:</strong> {{range .LocationST.Locations}} {{.}}, {{end}}</p>
+                    <p><strong>Date:</strong> {{range .DateST.Dates}} {{.}}, {{end}}</p>
+                    <p><strong>Relation:</strong> { {{range $key, $value := .RelationST.DatesLocation}}<strong>{{ $key }}:</strong> {{range $value}} {{.}}, {{end}}{{end}} }</p>
+                    <center><button type="button" onclick="toggleInfo('{{.Id}}')">Hide Info</button></center>
                 </div>
             </div>
         {{end}}
     </div>
 
     <script>
+        document.getElementById('search').addEventListener('change', function() {
+            var options = document.querySelectorAll('#search-bar option');
+            var selectedValue = this.value;
+            options.forEach(function(option) {
+                if (option.value === selectedValue) {
+                    document.getElementById('selected-id').value = option.getAttribute('reel-value');
+                }
+            });
+        });
+
         function toggleInfo(id) {
             var basicInfoDiv = document.getElementById('basicinfo-' + id);
             var moreInfoDiv = document.getElementById('moreinfo-' + id);
 
-            if (basicInfoDiv.style.display === 'none') {
-                basicInfoDiv.style.display = 'block';
-                moreInfoDiv.style.display = 'none';
-            } else {
-                basicInfoDiv.style.display = 'none';
-                moreInfoDiv.style.display = 'block';
+            if (basicInfoDiv && moreInfoDiv) {
+                if (basicInfoDiv.style.display === 'none') {
+                    basicInfoDiv.style.display = 'block';
+                    moreInfoDiv.style.display = 'none';
+                } else {
+                    basicInfoDiv.style.display = 'none';
+                    moreInfoDiv.style.display = 'block';
+                }
             }
         }
     </script>
 </body>
-
 
 </html>

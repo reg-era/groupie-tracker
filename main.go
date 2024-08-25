@@ -15,7 +15,7 @@ func main() {
 	port := ":8080"
 
 	// fetch the Api content in another routine
-	go tracker.APiProcess(API)
+	tracker.APiProcess(API)
 
 	// serving style
 	http.Handle("/style/", http.StripPrefix("/style/", http.FileServer(http.Dir("./website/style/"))))
