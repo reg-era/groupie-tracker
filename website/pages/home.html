@@ -7,11 +7,13 @@
     <title>Groupie Tracker</title>
     <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/44205180?v=4">
     <link href='https://fonts.googleapis.com/css?family=JetBrains+Mono' rel='stylesheet'>
-    <link rel="stylesheet" href="style/home.css">
+    <link rel="stylesheet" href="../style/home.css">
 </head>
 
 <body>
-    <h1>Groupie Tracker</h1>
+    <div class="nav">
+        <a href="/">Groupie Tracker</a>
+    </div>
 
     <div class="search">
         <form action="/" method="post">
@@ -32,6 +34,7 @@
             <button type="submit">🔍</button>
         </form>
     </div>
+    
     <div class="containt">
         {{range .}}
             <div class="artist-card">
