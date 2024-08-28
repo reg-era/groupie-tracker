@@ -19,16 +19,8 @@
         <form action="/" method="post">
             <input list="search-bar" id="search" name="search" />
             <datalist id="search-bar">
-                {{range .}}
-                    <option value="{{.Name}} - artist/band"></option>
-                    {{range .Members}}
-                        <option value="{{.}} - members"></option>
-                    {{end}}
-                    {{range .LocationST.Locations}}
-                        <option value="{{.}} - locations"></option>
-                    {{end}}
-                    <option value="{{.FirstAlbum}} - first album date"></option>
-                    <option value="{{.CreationDate}} - creation date"></option>
+                {{range $key, $value := .Option}}
+                    <option value="{{$key}} - artist/band"></option>
                 {{end}}
             </datalist>
             <button type="submit">🔍</button>
@@ -36,7 +28,7 @@
     </div>
     
     <div class="containt">
-        {{range .}}
+        {{range .Data}}
             <div class="artist-card">
                 <div class="basicinfo" id="basicinfo-{{.Id}}">
                     <img src="{{.Image}}" alt="{{.Name}}">

@@ -3,11 +3,9 @@ package webserver
 import (
 	"html/template"
 	"net/http"
-
-	"GTapi/tracker"
 )
 
-func ExecuteTemplate(w http.ResponseWriter, data []tracker.Artist) {
+func ExecuteTemplate(w http.ResponseWriter, data any) {
 	// parse the web page template
 	t, err := template.ParseFiles("./website/pages/home.html")
 	if err != nil {
