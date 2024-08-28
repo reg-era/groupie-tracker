@@ -18,18 +18,17 @@
             <input list="search-bar" id="search" name="search" />
             <datalist id="search-bar">
                 {{range .}}
-                    <option value="{{.Name}} - artist/band" reel-value="{{.Id}}"></option>
+                    <option value="{{.Name}} - artist/band"></option>
                     {{range .Members}}
-                        <option value="{{.}} - members" reel-value="{{.Id}}"></option>
+                        <option value="{{.}} - members"></option>
                     {{end}}
                     {{range .LocationST.Locations}}
-                        <option value="{{.}} - locations" reel-value="{{.Id}}"></option>
+                        <option value="{{.}} - locations"></option>
                     {{end}}
-                    <option value="{{.FirstAlbum}} - first album date" reel-value="{{.Id}}"></option>
-                    <option value="{{.CreationDate}} - creation date" reel-value="{{.Id}}"></option>
+                    <option value="{{.FirstAlbum}} - first album date"></option>
+                    <option value="{{.CreationDate}} - creation date"></option>
                 {{end}}
             </datalist>
-            <input type="hidden" id="selected-id" name="selected-id" />
             <button type="submit">🔍</button>
         </form>
     </div>
@@ -57,16 +56,6 @@
     </div>
 
     <script>
-        document.getElementById('search').addEventListener('change', function() {
-            var options = document.querySelectorAll('#search-bar option');
-            var selectedValue = this.value;
-            options.forEach(function(option) {
-                if (option.value === selectedValue) {
-                    document.getElementById('selected-id').value = option.getAttribute('reel-value');
-                }
-            });
-        });
-
         function toggleInfo(id) {
             var basicInfoDiv = document.getElementById('basicinfo-' + id);
             var moreInfoDiv = document.getElementById('moreinfo-' + id);

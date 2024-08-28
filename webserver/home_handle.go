@@ -1,12 +1,13 @@
 package webserver
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
 	"GTapi/tracker"
 )
+
+var Options = make(map[string]int)
 
 func HomeHandle(w http.ResponseWriter, r *http.Request) {
 	// check the reauest info error
@@ -19,15 +20,14 @@ func HomeHandle(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		ExecuteTemplate(w, tracker.Artists)
 	case "POST":
+		GetOptions(tracker.Artists)
 		value := r.PostFormValue("search")
 		if value != "" {
-			data, err := SearchHandele(value, tracker.Artists)
-			if err != nil {
-				http.Error(w, "Status Status Bad Request 400", http.StatusBadRequest)
-				return
-			} else {
-				ExecuteTemplate(w, data)
+			var data []tracker.Artist
+			if v, ok := Options[value]; ok {
+				data = append(data, tracker.Artists[v])
 			}
+			ExecuteTemplate(w, data)
 		}
 	default:
 		http.Error(w, "Status Method Not Allowed 405", http.StatusMethodNotAllowed)
@@ -35,12 +35,17 @@ func HomeHandle(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func SearchHandele(value string, data []tracker.Artist) ([]tracker.Artist, error) {
-	id, err := strconv.Atoi(value)
-	if err != nil || id <= 0 || id > len(data) {
-		return nil, fmt.Errorf("Error")
-	} else {
-		return []tracker.Artist{data[id-1]}, nil
+func GetOptions(data []tracker.Artist) {
+	for i, c := range data {
+		Options[c.Name+" - artist/band"] = i
+		Options[c.FirstAlbum+" - first album date"] = i
+		Options[strconv.Itoa(c.CreationDate)+" - creation date"] = i
+		for _, j := range c.Members {
+			Options[j+" - members"] = i
+		}
+		for _, j := range c.LocationST.Locations {
+			Options[j+" - locations"] = i
+		}
 	}
 }
 
