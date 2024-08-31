@@ -20,7 +20,7 @@
             <input list="search-bar" id="search" name="search" />
             <datalist id="search-bar">
                 {{range $key, $value := .Option}}
-                    <option value="{{$key}} - artist/band"></option>
+                    <option value="{{$key}}"></option>
                 {{end}}
             </datalist>
             <button type="submit">🔍</button>
