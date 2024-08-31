@@ -34,14 +34,13 @@
     {{else}}
         <div class="containt">
         {{range .Data}}
-                <div class="artist-card">
+                <div class="artist-card" onclick="toggleInfo('{{.Id}}')">
                     <div class="basicinfo" id="basicinfo-{{.Id}}">
                         <img src="{{.Image}}" alt="{{.Name}}">
                         <h2>{{.Name}}</h2>
                         <p>{{.Id}}</p>
                         <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
                         <p><strong>Creation Year:</strong> {{.CreationDate}}</p>
-                        <center><button type="button" onclick="toggleInfo('{{.Id}}')">Show Info</button></center>
                     </div>
                     <div class="moreinfo" id="moreinfo-{{.Id}}" style="display: none;">
                         <p><strong>Members:</strong> {{range .Members}}{{.}}, {{end}}</p>
@@ -49,7 +48,6 @@
                         <p><strong>Location:</strong> {{range .LocationST.Locations}} {{.}}, {{end}}</p>
                         <p><strong>Date:</strong> {{range .DateST.Dates}} {{.}}, {{end}}</p>
                         <p><strong>Relation:</strong> { {{range $key, $value := .RelationST.DatesLocation}}<strong>{{ $key }}:</strong> {{range $value}} {{.}}, {{end}}{{end}} }</p>
-                        <center><button type="button" onclick="toggleInfo('{{.Id}}')">Hide Info</button></center>
                     </div>
                 </div>
             {{end}}
