@@ -26,29 +26,35 @@
             <button type="submit">🔍</button>
         </form>
     </div>
-    
-    <div class="containt">
+
+    {{if .Notfound}}
+        <div class="notfound">
+            <center><h1>Artist not found</h1></center>
+        </div>
+    {{else}}
+        <div class="containt">
         {{range .Data}}
-            <div class="artist-card">
-                <div class="basicinfo" id="basicinfo-{{.Id}}">
-                    <img src="{{.Image}}" alt="{{.Name}}">
-                    <h2>{{.Name}}</h2>
-                    <p>{{.Id}}</p>
-                    <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
-                    <p><strong>Creation Year:</strong> {{.CreationDate}}</p>
-                    <center><button type="button" onclick="toggleInfo('{{.Id}}')">Show Info</button></center>
+                <div class="artist-card">
+                    <div class="basicinfo" id="basicinfo-{{.Id}}">
+                        <img src="{{.Image}}" alt="{{.Name}}">
+                        <h2>{{.Name}}</h2>
+                        <p>{{.Id}}</p>
+                        <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
+                        <p><strong>Creation Year:</strong> {{.CreationDate}}</p>
+                        <center><button type="button" onclick="toggleInfo('{{.Id}}')">Show Info</button></center>
+                    </div>
+                    <div class="moreinfo" id="moreinfo-{{.Id}}" style="display: none;">
+                        <p><strong>Members:</strong> {{range .Members}}{{.}}, {{end}}</p>
+                        <!-- Integrate Google Map to view the location -->
+                        <p><strong>Location:</strong> {{range .LocationST.Locations}} {{.}}, {{end}}</p>
+                        <p><strong>Date:</strong> {{range .DateST.Dates}} {{.}}, {{end}}</p>
+                        <p><strong>Relation:</strong> { {{range $key, $value := .RelationST.DatesLocation}}<strong>{{ $key }}:</strong> {{range $value}} {{.}}, {{end}}{{end}} }</p>
+                        <center><button type="button" onclick="toggleInfo('{{.Id}}')">Hide Info</button></center>
+                    </div>
                 </div>
-                <div class="moreinfo" id="moreinfo-{{.Id}}" style="display: none;">
-                    <p><strong>Members:</strong> {{range .Members}}{{.}}, {{end}}</p>
-                    <!-- Integrate Google Map to view the location -->
-                    <p><strong>Location:</strong> {{range .LocationST.Locations}} {{.}}, {{end}}</p>
-                    <p><strong>Date:</strong> {{range .DateST.Dates}} {{.}}, {{end}}</p>
-                    <p><strong>Relation:</strong> { {{range $key, $value := .RelationST.DatesLocation}}<strong>{{ $key }}:</strong> {{range $value}} {{.}}, {{end}}{{end}} }</p>
-                    <center><button type="button" onclick="toggleInfo('{{.Id}}')">Hide Info</button></center>
-                </div>
-            </div>
-        {{end}}
-    </div>
+            {{end}}
+        </div>
+    {{end}}
 
     <script>
         function toggleInfo(id) {

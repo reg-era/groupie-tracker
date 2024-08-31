@@ -9,8 +9,9 @@ import (
 var Options = make(map[string]int)
 
 type Asemble struct {
-	Data   []tracker.Artist
-	Option map[string]int
+	Data     []tracker.Artist
+	Option   map[string]int
+	Notfound bool
 }
 
 func HomeHandle(w http.ResponseWriter, r *http.Request) {
@@ -22,7 +23,7 @@ func HomeHandle(w http.ResponseWriter, r *http.Request) {
 	}
 	switch r.Method {
 	case "GET":
-		ExecuteTemplate(w, Asemble{tracker.Artists, Options})
+		ExecuteTemplate(w, Asemble{tracker.Artists, Options, false})
 	case "POST":
 		value := r.PostFormValue("search")
 		if value != "" {
@@ -36,10 +37,9 @@ func HomeHandle(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 			if len(data) != 0 {
-				ExecuteTemplate(w, data)
+				ExecuteTemplate(w, Asemble{data, Options, false})
 			} else {
-				http.Error(w, "Status Not Found 404", http.StatusNotFound)
-				return
+				ExecuteTemplate(w, Asemble{data, Options, true})
 			}
 		}
 	default:
