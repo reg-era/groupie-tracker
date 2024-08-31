@@ -31,7 +31,7 @@ func HomeHandle(w http.ResponseWriter, r *http.Request) {
 			if v, ok := Options[value]; ok {
 				data = append(data, tracker.Artists[v])
 			} else {
-				ids := SearchPro(value)
+				ids := SearchProcess(value)
 				for _, i := range ids {
 					data = append(data, tracker.Artists[i])
 				}

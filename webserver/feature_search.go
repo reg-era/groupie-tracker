@@ -7,29 +7,42 @@ import (
 	"GTapi/tracker"
 )
 
-func SearchPro(key string) []int {
+func SearchProcess(key string) []int {
 	res := []int{}
 	value := strings.ToLower(key)
 	for k, v := range tracker.Artists {
-		i := 0
 		if strings.Contains(strings.ToLower(v.Name), value) || strings.Contains(strings.ToLower(v.FirstAlbum), value) || strconv.Itoa(v.CreationDate) == value {
-			i++
-		}
-		for _, j := range v.Members {
-			if strings.Contains(strings.ToLower(j), value) {
-				i++
-			}
-		}
-		for _, j := range v.LocationST.Locations {
-			if strings.Contains(strings.ToLower(j), value) {
-				i++
-			}
-		}
-		if i != 0 {
 			res = append(res, k)
 		}
 	}
+	for k, v := range tracker.Artists {
+		for _, j := range v.Members {
+			if strings.Contains(strings.ToLower(j), value) {
+				if !CheckVal(k, res) {
+					res = append(res, k)
+				}
+			}
+		}
+	}
+	for k, v := range tracker.Artists {
+		for _, j := range v.LocationST.Locations {
+			if strings.Contains(strings.ToLower(j), value) {
+				if !CheckVal(k, res) {
+					res = append(res, k)
+				}
+			}
+		}
+	}
 	return res
+}
+
+func CheckVal(n int, tab []int) bool {
+	for i := 0; i < len(tab); i++ {
+		if n == tab[i] {
+			return true
+		}
+	}
+	return false
 }
 
 func GetOptions(data []tracker.Artist) {
