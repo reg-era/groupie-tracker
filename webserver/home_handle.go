@@ -41,6 +41,8 @@ func HomeHandle(w http.ResponseWriter, r *http.Request) {
 			} else {
 				ExecuteTemplate(w, Asemble{data, Options, true})
 			}
+		} else {
+			ExecuteTemplate(w, Asemble{tracker.Artists, Options, false})
 		}
 	default:
 		http.Error(w, "Status Method Not Allowed 405", http.StatusMethodNotAllowed)
