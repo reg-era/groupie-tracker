@@ -11,13 +11,13 @@ func SearchProcess(key string) []int {
 	res := []int{}
 	value := strings.ToLower(key)
 	for k, v := range tracker.Artists {
-		if strings.Contains(strings.ToLower(v.Name), value) || strings.Contains(strings.ToLower(v.FirstAlbum), value) || strconv.Itoa(v.CreationDate) == value {
+		if strings.HasPrefix(strings.ToLower(v.Name), value) || strings.ToLower(v.FirstAlbum) == value || strconv.Itoa(v.CreationDate) == value {
 			res = append(res, k)
 		}
 	}
 	for k, v := range tracker.Artists {
 		for _, j := range v.Members {
-			if strings.Contains(strings.ToLower(j), value) {
+			if strings.HasPrefix(strings.ToLower(j), value) {
 				if !CheckVal(k, res) {
 					res = append(res, k)
 				}
@@ -47,7 +47,7 @@ func CheckVal(n int, tab []int) bool {
 
 func GetOptions(data []tracker.Artist) {
 	for i, c := range data {
-		Options[c.Name] = i
+		Options[c.Name+" - artist/band"] = i
 		Options[c.FirstAlbum+" - first album date"] = i
 		Options[strconv.Itoa(c.CreationDate)+" - creation date"] = i
 		for _, j := range c.Members {
