@@ -1,0 +1,10 @@
+{{template "base" .}} {{define "title"}}Error Page | Groupie Tracker{{end}}
+{{define "main"}}
+<nav>
+  <a class="link" href="/">⬅</a>
+</nav>
+<div>
+  <h1 class="errorStatus">{{.Status}}</h1>
+  <p class="errorMessage">{{.Text}}</p>
+</div>
+{{end}}

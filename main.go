@@ -4,28 +4,25 @@ import (
 	"log"
 	"net/http"
 
-	"GTapi/tracker"
-	"GTapi/webserver"
+	"groupie-tracker-filter/pkg/funcs"
 )
 
-var API = "https://groupietrackers.herokuapp.com/api"
-
-// ********* there is probably 4s delai in the data fetching !!!!!!
 func main() {
-	port := ":8080"
+	funcs.ParseJson()
 
-	// fetch the Api content in another routine
-	go tracker.APiProcess(API)
+	port := ":8000"
 
-	// serving style
-	http.Handle("/style/", http.StripPrefix("/style/", http.FileServer(http.Dir("./website/style/"))))
+	// Handlers
+	http.HandleFunc("/", funcs.HomeHandler)
+	http.HandleFunc("/group/", funcs.GroupHandler)
+	http.HandleFunc("/search", funcs.FilterHandler)
 
-	// handle web functions
-	http.HandleFunc("/", webserver.HomeHandle)
+	// Serving static files
+	http.Handle("/website/", http.StripPrefix("/website", http.FileServer(http.Dir("./website"))))
 
-	log.Println("Serving files on " + port + "...")
-	log.Println("http://localhost" + port + "/")
-	// lanche the server
+	log.Println("Server is running on http://localhost" + port)
+
+	// Start server
 	err := http.ListenAndServe(port, nil)
 	if err != nil {
 		log.Fatal(err)

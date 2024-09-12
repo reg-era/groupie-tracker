@@ -1,4 +1,4 @@
-# Groupie Tracker
+# Groupie Tracker Filter
 
 ### API: [Groupie-Tracker-API](https://groupietrackers.herokuapp.com/api).
 
@@ -6,27 +6,28 @@
 ```
 |_main.go
 |
-|_webserver
-| |_roothandler.go
-| |_posthandler.go
-|  
-|_tracker
-|  |_process.go
-|  |_funcs.go
+|_/pkg/funcs
+| |_filter.go
+| |_handlers.go
+| |_parsejson.go
+| |_struct.go
+|
 |
 |_website
-| |_pages
+| |_html
 | | |
-| | |_page1.html
-| | |_page2.html
+| | |_base.html
+| | |_filter.html
+| | |_error.html
+| | |_group.html
+| | |_home.html
 | | 
-| |_style
-| | |_style-page1.css
-| | |_style-page2.css
-| |
-| |_img
-|   |_icone.jpg
-|   |_background.jpg
+| |_static
+|   | 
+|   |_css
+|   | |_style.css
+|   |
+|   |_icon.png
 |
 |_README.md
 ```

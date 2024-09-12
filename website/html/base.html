@@ -1,0 +1,24 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Faster+One&family=Monoton&family=Oswald&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/website/static/icon.png" />
+    <link rel="stylesheet" href="/website/static/css/style.css" />
+    <title>{{template "title" .}}</title>
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">Groupie Tracker</a></h1>
+    </header>
+    <main>{{template "main" .}}</main>
+  </body>
+</html>
+{{end}}

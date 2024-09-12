@@ -1,0 +1,22 @@
+{{template "base" .}}
+
+{{define "title"}}Filter Results | Groupie Tracker{{end}}
+
+{{define "main"}}
+
+  <div>
+    <h3 class="results">Filter Results:</h3>
+  </div>
+  <div class="gallery">
+    {{range $i, $v := .}} 
+    <div class="element">
+      <a href="/group?id={{$v.ID}}" class="label" name="dir" id="dir" action="click">
+        <img src="{{$v.Image}}"> <br>
+        <h3>{{$v.Name}}</h3>
+      </a><br></option>
+    </div>
+    {{end}}
+  </div>
+</div>
+<br>
+{{end}}

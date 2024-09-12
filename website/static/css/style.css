@@ -1,0 +1,178 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Oswald', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1em 0;
+  text-align: center;
+}
+
+header h1 a {
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Faster One', cursive;
+  font-size: 2.5rem;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+nav {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+nav h2 {
+  font-size: 2rem;
+  font-family: 'Monoton', cursive;
+}
+
+a.link {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+a.link:hover {
+  color: #555;
+}
+
+.errorStatus {
+  color: red;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.errorMessage {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+table th {
+  background-color: #333;
+  color: white;
+}
+
+table td {
+  background-color: #f9f9f9;
+}
+
+.details summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: #444;
+}
+
+.details p {
+  margin: 0;
+  padding: 10px;
+}
+
+
+
+img.img-thumbnail {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 20px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.gallery .element {
+  width: 200px;
+  text-align: center;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+label, input[type="checkbox"] {
+  font-size: 1rem;
+}
+
+.findButton {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 15px;
+  display: flex;
+  text-align: center;
+  margin: auto;
+  margin-block: 15px;
+}
+
+.findButton:hover {
+  background-color: #555;
+}
+
+.searchbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.searchbar input {
+  width: 250px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.searchbar img {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+form .firstalbum, form .creationdate, form .members {
+  margin: 15px 0;
+  text-align: center;
+}
+
+form input[type="range"] {
+  width: 10%;
+}
+
+form output.year {
+  display: inline-block;
+  margin-left: 10px;
+}
