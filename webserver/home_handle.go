@@ -2,6 +2,7 @@ package webserver
 
 import (
 	"net/http"
+	"strings"
 
 	"GTapi/tracker"
 )
@@ -27,6 +28,10 @@ func HomeHandle(w http.ResponseWriter, r *http.Request) {
 	case "POST":
 		value := r.PostFormValue("search")
 		if value != "" {
+			value = strings.ReplaceAll(value, " - first album date", "")
+			value = strings.ReplaceAll(value, " - creation date", "")
+			value = strings.ReplaceAll(value, " - members", "")
+			value = strings.ReplaceAll(value, " - locations", "")
 			var data []tracker.Artist
 			if v, ok := Options[value]; ok {
 				data = append(data, tracker.Artists[v])

@@ -47,7 +47,7 @@ func CheckVal(n int, tab []int) bool {
 
 func GetOptions(data []tracker.Artist) {
 	for i, c := range data {
-		Options[c.Name+" - artist/band"] = i
+		Options[c.Name] = i
 		Options[c.FirstAlbum+" - first album date"] = i
 		Options[strconv.Itoa(c.CreationDate)+" - creation date"] = i
 		for _, j := range c.Members {
