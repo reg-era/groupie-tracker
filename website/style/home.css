@@ -23,10 +23,60 @@ body {
     color: var(--text-secondary);
 }
 
-h1 {
-    color: var(--text-primary);
-    margin: 20px 0;
+.nav {
     text-align: center;
+}
+
+a {
+    color: var(--text-primary);
+    font-size: 46px;
+    text-decoration: none;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.search form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.search input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid var(--text-primary);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-color);
+    color: var(--text-secondary);
+    font-size: 22px;
+    margin-right: 10px;
+    transition: var(--transition-time);
+}
+
+.search input:focus {
+    border-color: var(--card-bg);
+    outline: none;
+}
+
+.search button {
+    background-color: var(--text-primary);
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--bg-color);
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 22px;
+    transition: var(--transition-time);
+}
+
+.search button:hover {
+    background-color: var(--button-hover-bg);
 }
 
 .containt {
