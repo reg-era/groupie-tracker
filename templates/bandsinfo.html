@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/css/stylebandsinfo.css">
+    <title>Bands-info</title>
+</head>
+
+<body>
+    <header>
+        <div class="banner">
+            <a href="/"><img src="static/img/icon-01.png" alt="" class="link"></a>
+            <h1 id="info">Bands Info</h1>
+        </div>
+    </header>
+    <div class="container">
+        <div class="image_name">
+            <h2>{{.Name}}</h2>
+            <img src="{{.Image}}" alt="{{.Name}}">
+            <p>Creation Date : {{.CreationDate}}</p>
+        </div>
+    </div>
+    <div class="container">
+        <div id="border">
+            <div class="detail">Members</div>
+            <div class="info">
+                {{ range .Members }}
+                <p> - {{ . }}&nbsp;</p>
+                {{ end }}
+            </div>
+        </div>
+
+        <div id="border">
+            <div class="detail">Locations</div>
+            <div class="info">
+                {{ range .Locations }}
+                <p> - {{ . }}&nbsp;</p>
+                {{ end }}
+            </div>
+        </div>
+
+        <div id="border">
+            <div class="detail">Concert Dates</div>
+            <div class="info">
+                {{ range .ConcertDates }}
+                <p> - {{ . }}&nbsp;</p>
+                {{ end }}
+            </div>
+        </div>
+
+
+        <div id="border">
+            <div class="detail">Relations</div>
+            <div class="info">
+                {{ range $key, $value := .Relation }}
+                <p> - {{ $key }}: {{ $value }}&nbsp;</p>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+    <div class="map">
+        <gmp-map center="43.4142989,-124.2301242" zoom="2" map-id="DEMO">
+            {{ range $value := .Coordinates }}
+                <gmp-advanced-marker position="{{$value}}" title="Seattle, WA"></gmp-advanced-marker>
+            {{end }}
+        </gmp-map>
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCTAVP5kfJGMAH2KoX8qo-n7r90Iosbjg&loading=async&libraries=maps,marker&v=beta" defer>
+            </script>
+    </div>
+</body>
+</html>

@@ -1,35 +1,46 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"net/http"
+	"os"
 
-	"GTapi/tracker"
-	"GTapi/webserver"
+	help "tools/tools"
 )
 
-//  Google map API KEY = AIzaSyCCTAVP5kfJGMAH2KoX8qo-n7r90Iosbjg
+func ServeHandle(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path == "/static/" {
+		http.Redirect(w, r, "/", http.StatusPermanentRedirect)
+		return
+	}
+	file := http.Dir("static")
+	fs := http.StripPrefix("/static/", http.FileServer(file))
+	fs.ServeHTTP(w, r)
+}
 
-var API = "https://groupietrackers.herokuapp.com/api"
+func setupRoutes() {
+	http.HandleFunc("/static/", ServeHandle)
+	http.HandleFunc("/", help.Index)
+	http.HandleFunc("/404", help.NotFound)
+	http.HandleFunc("/bandsinfo", help.Bandinfo)
+}
 
-// ********* there is probably 4s delai in the data fetching !!!!!!
+/* get the port number from the env var */
+func getPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		return "localhost:8080"
+	}
+	return "localhost:" + port
+}
+
 func main() {
-	port := ":8080"
-
-	// fetch the Api content in another routine
-	tracker.APiProcess(API)
-
-	// serving style
-	http.Handle("/style/", http.StripPrefix("/style/", http.FileServer(http.Dir("./website/style/"))))
-
-	// handle web functions
-	http.HandleFunc("/", webserver.HomeHandle)
-
-	log.Println("Serving files on " + port + "...")
-	log.Println("http://localhost" + port + "/")
-	// lanche the server
-	err := http.ListenAndServe(port, nil)
+	setupRoutes()
+	Port := getPort()
+	fmt.Println("Server is running at http://" + Port)
+	err := http.ListenAndServe(Port, nil)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("Error: ", err)
+		return
 	}
 }

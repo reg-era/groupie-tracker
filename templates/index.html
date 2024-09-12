@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/css/style.css">
+    <title>Groupie-tracker</title>
+</head>
+<body>
+    <header>
+        <a href="/"><img src="static/img/icon-01.png" alt=""></a>
+    </header>
+
+    <div class="search">
+        <form action="/" method="post">
+            <input list="search-bar" id="search" name="search" />
+            <datalist id="search-bar">
+                {{range $key, $value := .Option}}
+                    <option value="{{$key}}"></option>
+                {{end}}
+            </datalist>
+            <button type="submit">🔍</button>
+        </form>
+    </div>
+
+    {{if .Notfound}}
+        <div class="notfound">
+            <center><h1>Artist not found</h1></center>
+        </div>
+    {{else}}
+    <div class="container">
+        {{ range .Cards }}
+        <div class="item">
+            <h3>{{.Name}}</h3>
+            <img src="{{.Image}}" alt="{{.Name}}">
+            <div class="btn">
+                <a href="/bandsinfo?=id{{.Id}}" class="button">MORE</a>
+            
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    {{end}}
+</body>
+</html>
