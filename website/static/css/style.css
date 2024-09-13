@@ -141,26 +141,11 @@ label, input[type="checkbox"] {
   background-color: #555;
 }
 
-.searchbar {
+.select {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 20px 0;
-}
-
-.searchbar input {
-  width: 250px;
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.searchbar img {
-  width: 20px;
-  height: 20px;
-  margin-left: 10px;
-  cursor: pointer;
 }
 
 form .firstalbum, form .creationdate, form .members {
