@@ -5,6 +5,16 @@ import (
 	"net/http"
 )
 
+func ServeHandle(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path == "/static/" {
+		http.Redirect(w, r, "/", http.StatusPermanentRedirect)
+		return
+	}
+	file := http.Dir("static")
+	fs := http.StripPrefix("/static/", http.FileServer(file))
+	fs.ServeHTTP(w, r)
+}
+
 func ExecuteTemplate(w http.ResponseWriter, data any) {
 	// parse the web page template
 	t, err := template.ParseFiles("templates/index.html")
