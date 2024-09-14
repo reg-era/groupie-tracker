@@ -2,11 +2,12 @@
   font-family: "Bebas Neue", sans-serif;
   font-weight: 700;
   font-style: oblique;
+  box-sizing: border-box; 
 }
 
 body {
   margin: 0;
-  background-image: url(../img/81027.jpg);
+  background-image: url(XbackHome.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
@@ -19,6 +20,7 @@ body {
   border: 4px solid black;
   border-radius: 10px;
   padding: 1em;
+  max-width: 100%;
 }
 
 .search-form {
@@ -32,7 +34,7 @@ body {
   font-size: 1.2em; 
   font-weight: 700;
   color: black;
-  margin-right: 1em; 
+  margin-right: 1em;
 }
 
 .search-input {
@@ -59,35 +61,32 @@ body {
   transform: translateY(2px);
 }
 
-
 .container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 3em;
+  gap: 2em;
+  padding: 1em;
 }
 
 .notfound {
-  flex: 1 1 25%;
-  font-size: 0.9em;
   background-color: #f7eee5;
   border: 4px solid black;
-  min-height: min-content;
-  max-width: max-content;
   padding: 2em;
   border-radius: 10px;
+  text-align: center;
+  max-width: 100%;
+  flex: 1 1 auto;
 }
 
-
 .item {
-  flex: 1 1 25%;
-  text-align: center;
-  font-size: 0.9em;
   background-color: #f7eee5;
   border: 4px solid black;
-  min-height: min-content;
-  max-width: max-content;
-
+  padding: 1em;
+  border-radius: 10px;
+  text-align: center;
+  flex: 1 1 calc(25% - 2em);
+  box-sizing: border-box;
 }
 
 .item:hover {
@@ -95,24 +94,54 @@ body {
 }
 
 .button {
-  width: 10em;
-  font-size: x-large;
-  color: rgb(255, 255, 255);
+  display: block;
+  width: 100%;
+  font-size: large;
+  color: #fff;
   background-color: black;
   border: solid;
   border-color: white;
   border-radius: 10px;
   text-decoration: none;
-}
-
-.button:hover {
-  transform: translateY(10px);
-  box-shadow: 5px 5px 10px rgba(255, 0, 0, 0.822);
+  text-align: center;
+  padding: 0.5em;
   cursor: pointer;
 }
 
+.button:hover {
+  transform: translateY(5px);
+  box-shadow: 0 4px 6px rgba(255, 0, 0, 0.6);
+}
+
 .btn {
-  padding: 2vh;
+  padding: 1em;
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-button {
+    margin-left: 0;
+    margin-top: 0.5em;
+    width: 100%;
+  }
+
+  .item {
+    flex: 1 1 calc(50% - 2em);
+  }
+}
+
+@media (max-width: 480px) {
+  .item {
+    flex: 1 1 100%;
+  }
+
+  .button {
+    font-size: medium;
+  }
 }

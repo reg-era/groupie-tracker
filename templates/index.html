@@ -4,18 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./static/css/style.css">
+    <link rel="stylesheet" href="./static/style.css">
     <title>Groupie-tracker</title>
 </head>
 
 <body>
     <header>
-        <a href="/"><img src="static/img/icon-01.png" alt=""></a>
+        <a href="/"><img src="static/Xicone.png" alt=""></a>
     </header>
 
     <div class="search">
         <form class="search-form" action="/" method="post">
-            <p class="search-label">Search :</p>            <input class="search-input" list="search-bar" name="search" />
+            <p class="search-label">Search :</p> <input class="search-input" list="search-bar" name="search" />
             <datalist id="search-bar">
                 {{range $key, $value := .Option}}
                 <option value="{{$key}}"></option>
@@ -34,13 +34,15 @@
     {{else}}
     <div class="container">
         {{ range .Cards }}
-        <div class="item">
-            <h3>{{.Name}}</h3>
-            <img src="{{.Image}}" alt="{{.Name}}">
-            <div class="btn">
-                <a href="/bandsinfo?=id{{.Id}}" class="button">MORE</a>
+        <form action="/bandsinfo?=id{{.Id}}" method="POST">
+            <div class="item">
+                <h3>{{.Name}}</h3>
+                <img src="{{.Image}}" alt="{{.Name}}">
+                <div class="btn">
+                    <button type="submit" class="button">MORE</button>
+                </div>
             </div>
-        </div>
+        </form>
         {{ end }}
     </div>
     {{end}}

@@ -8,7 +8,7 @@ import (
 )
 
 func Bandinfo(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
+	if r.Method != "POST" {
 		ExecuteError(w, "Method Not allowed", "405")
 		return
 	}
