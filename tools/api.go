@@ -50,10 +50,10 @@ func addLocations(cities []string, id int) Card {
 			os.Exit(1)
 		}
 		geo := strconv.FormatFloat(Lat, 'f', -1, 64) + "," + strconv.FormatFloat(Lng, 'f', -1, 64)
-		data.Cards[id].Coordinates = append(data.Cards[id].Coordinates, geo)
+		Data.Cards[id].Coordinates = append(Data.Cards[id].Coordinates, geo)
 	}
 
-	return data.Cards[id]
+	return Data.Cards[id]
 }
 
 func FetchArtistData(baseURL string) ([]Card, error) {

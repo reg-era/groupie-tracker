@@ -1,12 +1,11 @@
 package tools
 
 import (
-	"log"
 	"net/http"
 	"strings"
 )
 
-var data PageData
+var Data PageData
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
@@ -14,15 +13,9 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	cards, err := FetchArtistData("https://groupietrackers.herokuapp.com/api")
-	if err != nil {
-		ExecuteError(w, "Status Internal Server Error", "500")
-		log.Printf("Error fetching artist data: %v", err)
-		return
-	}
-
-	data = PageData{Cards: cards}
-	GetOptions(data)
+	GetOptions(Data)
+	Data.Option = Options
+	Data.Notfound = false
 
 	if r.Method == "POST" {
 		value := r.PostFormValue("search")
@@ -35,17 +28,19 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			var newcard []Card
 			ids := SearchProcess(value)
 			for _, i := range ids {
-				newcard = append(newcard, data.Cards[i])
+				newcard = append(newcard, Data.Cards[i])
 			}
 			if len(newcard) != 0 {
+				Data.Notfound = false
 				ExecuteTemplate(w, PageData{Cards: newcard, Option: Options, Notfound: false})
 			} else {
-				ExecuteTemplate(w, PageData{Cards: newcard, Option: Options, Notfound: true})
+				Data.Notfound = true
+				ExecuteTemplate(w, Data)
 			}
 		} else {
-			ExecuteTemplate(w, PageData{Cards: cards, Option: Options, Notfound: false})
+			ExecuteTemplate(w, Data)
 		}
 	} else {
-		ExecuteTemplate(w, PageData{Cards: cards, Option: Options, Notfound: false})
+		ExecuteTemplate(w, Data)
 	}
 }

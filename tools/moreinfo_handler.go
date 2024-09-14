@@ -20,7 +20,7 @@ func Bandinfo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	card_with_geo := addLocations(data.Cards[i-1].Locations, i-1)
+	card_with_geo := addLocations(Data.Cards[i-1].Locations, i-1)
 	t, err := template.ParseFiles("templates/bandsinfo.html")
 	if err != nil {
 		ExecuteError(w, "Status Internal Server Error", "500")

@@ -10,7 +10,7 @@ var Options = make(map[string]int)
 func SearchProcess(key string) []int {
 	res := []int{}
 	value := strings.ToLower(key)
-	for k, v := range data.Cards {
+	for k, v := range Data.Cards {
 		if strings.HasPrefix(strings.ToLower(v.Name), value) || strings.ToLower(v.FirstAlbum) == value || strconv.Itoa(v.CreationDate) == value {
 			res = append(res, k)
 		}
