@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
 
 	help "tools/tools"
 )
@@ -25,18 +24,9 @@ func setupRoutes() {
 	http.HandleFunc("/bandsinfo", help.Bandinfo)
 }
 
-/* get the port number from the env var */
-func getPort() string {
-	port := os.Getenv("PORT")
-	if port == "" {
-		return "localhost:8080"
-	}
-	return "localhost:" + port
-}
-
 func main() {
 	setupRoutes()
-	Port := getPort()
+	Port := "localhost:8080"
 	fmt.Println("Server is running at http://" + Port)
 	err := http.ListenAndServe(Port, nil)
 	if err != nil {
