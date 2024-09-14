@@ -1,5 +1,12 @@
 package tools
 
+type APIindex struct {
+	Artists   string `json:"artists"`
+	Locations string `json:"locations"`
+	Dates     string `json:"dates"`
+	Relations string `json:"relation"`
+}
+
 type Artist struct {
 	Id           int      `json:"id"`
 	Image        string   `json:"image"`
@@ -7,13 +14,6 @@ type Artist struct {
 	Members      []string `json:"members"`
 	CreationDate int      `json:"creationDate"`
 	FirstAlbum   string   `json:"firstAlbum"`
-}
-
-type APIindex struct {
-	Artists   string `json:"artists"`
-	Locations string `json:"locations"`
-	Dates     string `json:"dates"`
-	Relations string `json:"relation"`
 }
 
 type APIlocations struct {

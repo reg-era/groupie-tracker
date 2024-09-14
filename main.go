@@ -20,7 +20,6 @@ func ServeHandle(w http.ResponseWriter, r *http.Request) {
 func setupRoutes() {
 	http.HandleFunc("/static/", ServeHandle)
 	http.HandleFunc("/", help.Index)
-	http.HandleFunc("/404", help.NotFound)
 	http.HandleFunc("/bandsinfo", help.Bandinfo)
 }
 

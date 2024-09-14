@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./static/css/style.css">
     <title>Groupie-tracker</title>
 </head>
+
 <body>
     <header>
         <a href="/"><img src="static/img/icon-01.png" alt=""></a>
     </header>
 
     <div class="search">
-        <form action="/" method="post">
-            <input list="search-bar" id="search" name="search" />
+        <form class="search-form" action="/" method="post">
+            <p class="search-label">Search :</p>            <input class="search-input" list="search-bar" name="search" />
             <datalist id="search-bar">
                 {{range $key, $value := .Option}}
-                    <option value="{{$key}}"></option>
+                <option value="{{$key}}"></option>
                 {{end}}
             </datalist>
-            <button type="submit">🔍</button>
+            <button class="search-button" type="submit">🔍</button>
         </form>
     </div>
 
     {{if .Notfound}}
+    <div class="container">
         <div class="notfound">
-            <center><h1>Artist not found</h1></center>
+            <h1>Artist not found</h1>
         </div>
+    </div>
     {{else}}
     <div class="container">
         {{ range .Cards }}
@@ -35,11 +39,11 @@
             <img src="{{.Image}}" alt="{{.Name}}">
             <div class="btn">
                 <a href="/bandsinfo?=id{{.Id}}" class="button">MORE</a>
-            
             </div>
         </div>
         {{ end }}
     </div>
     {{end}}
 </body>
+
 </html>
