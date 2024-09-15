@@ -2,6 +2,7 @@ package tools
 
 import (
 	"net/http"
+	"strconv"
 )
 
 var Rel []string
@@ -29,7 +30,7 @@ func FilterHandler(w http.ResponseWriter, r *http.Request) {
 func Filter(members []string, firstmin string, firstmax string, creatmin string, creatmax string, location string) []Card {
 	var found []Card
 	for _, v := range Data.Cards {
-		if /*CreationDateVal(creatmax, creatmin, v.CreationDate) && FirstAlbumVal(firstmax, firstmin, v.FirstAlbum) &&*/ Checkloca(location, v.Locations) && MembersVal(members, len(v.Members)) {
+		if CheckRange(creatmin, creatmax, strconv.Itoa(v.CreationDate)) && CheckRange(firstmin, firstmax, v.FirstAlbum) && MembersVal(members, len(v.Members)) && Checkloca(location, v.Locations) {
 			found = append(found, v)
 		}
 	}
