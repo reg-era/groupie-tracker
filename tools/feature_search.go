@@ -5,8 +5,6 @@ import (
 	"strings"
 )
 
-var Options = make(map[string]int)
-
 func SearchProcess(key string) []int {
 	res := []int{}
 	value := strings.ToLower(key)
@@ -41,18 +39,18 @@ func CheckVal(n int, tab []int) bool {
 	return false
 }
 
-func GetOptions(data PageData) {
+func GetOptions(data PageData) map[string]int {
+	options := make(map[string]int)
 	for i, c := range data.Cards {
-		Options[c.Name] = i
-		Options[c.FirstAlbum+" - first album date"] = i
-		Options[strconv.Itoa(c.CreationDate)+" - creation date"] = i
+		options[c.Name] = i
+		options[c.FirstAlbum+" - first album date"] = i
+		options[strconv.Itoa(c.CreationDate)+" - creation date"] = i
 		for _, j := range c.Members {
-			Options[j+" - members"] = i
+			options[j+" - members"] = i
 		}
 		for _, j := range c.Locations {
-			Options[j+" - locations"] = i
+			options[j+" - locations"] = i
 		}
 	}
+	return options
 }
-
-

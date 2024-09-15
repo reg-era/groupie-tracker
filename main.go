@@ -21,6 +21,7 @@ func main() {
 	http.HandleFunc("/static/", help.ServeHandle)
 	http.HandleFunc("/", help.Index)
 	http.HandleFunc("/bandsinfo", help.Bandinfo)
+	http.HandleFunc("/filter", help.FilterHandler)
 
 	fmt.Println("Server is running at http://" + Port)
 	err = http.ListenAndServe(Port, nil)

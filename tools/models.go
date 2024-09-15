@@ -59,7 +59,8 @@ type Card struct {
 }
 
 type PageData struct {
-	Cards    []Card
-	Option   map[string]int
-	Notfound bool
+	Cards      []Card
+	Option     map[string]int
+	Oplocation []string
+	Notfound   bool
 }

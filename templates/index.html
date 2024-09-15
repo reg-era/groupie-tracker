@@ -10,9 +10,63 @@
 </head>
 
 <body>
-    <header>
-        <a href="/"><img src="static/Xicone.png" alt=""></a>
-    </header>
+    <a href="/"><img src="static/Xicone.png" alt=""></a>
+
+    <div class="filter">
+        <form action="/filter" method="POST">
+            <div class="range-container">
+                <div class="firstalbum">
+                    <p>Enter the first album date:</p>
+                    <label for="firstAlbumMin">from:</label>
+                    <input type="range" id="firstAlbumMin" name="firstAlbumMin" min="1963" max="2020" step="1"
+                        value="1963" oninput="this.nextElementSibling.value = this.value">
+                    <output class="year">1963</output>
+                    <label for="firstAlbumMax">to:</label>
+                    <input type="range" id="firstAlbumMax" name="firstAlbumMax" min="1963" max="2020" step="1"
+                        value="2020" oninput="this.nextElementSibling.value = this.value">
+                    <output class="year">2020</output>
+                </div>
+                <div class="creationdate">
+                    <p>Enter the creation date:</p>
+                    <label for="creationDateMin">from:</label>
+                    <input type="range" id="creationDateMin" name="creationDateMin" min="1958" max="2020" step="1"
+                        value="1958" oninput="this.nextElementSibling.value = this.value">
+                    <output class="year">1958</output>
+                    <label for="creationDateMax">to:</label>
+                    <input type="range" id="creationDateMax" name="creationDateMax" min="1958" max="2020" step="1"
+                        value="2020" oninput="this.nextElementSibling.value = this.value">
+                    <output class="year">2020</output>
+                </div>
+            </div>
+
+            <div class="members-container">
+                <label>Select a number of members:</label>
+                <input type="checkbox" name="member" value="1"><label>1</label>
+                <input type="checkbox" name="member" value="2"><label>2</label>
+                <input type="checkbox" name="member" value="3"><label>3</label>
+                <input type="checkbox" name="member" value="4"><label>4</label>
+                <input type="checkbox" name="member" value="5"><label>5</label>
+                <input type="checkbox" name="member" value="6"><label>6</label>
+                <input type="checkbox" name="member" value="7"><label>7</label>
+                <input type="checkbox" name="member" value="8"><label>8</label>
+            </div>
+
+            <div class="select">
+                <select id="location" name="location">
+                    <option value="" disabled selected>Select a location</option>
+                    {{range .Oplocation}}
+                    <option value="{{.}}">{{.}}</option>
+                    {{end}}
+                </select>
+            </div>
+
+            <button type="submit" class="findButton">Search</button>
+            <input type="reset" class="findButton">
+        </form>
+    </div>
+
+
+
 
     <div class="search">
         <form class="search-form" action="/" method="post">

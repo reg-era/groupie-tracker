@@ -6,6 +6,107 @@ body {
   background-attachment: fixed;
 }
 
+
+/* -------------filter style-----------------  */
+
+.filter {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 4px solid black;
+  border-radius: 10px;
+  padding: 1em;
+  margin: 2em auto;
+  max-width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.filter p {
+  font-size: 1.1em;
+  color: black;
+  margin: 0.5em 0;
+}
+
+.filter label {
+  font-size: 1em;
+  color: black;
+}
+
+.filter .range-container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.filter input[type="range"] {
+  width: 100%;
+  margin: 0;
+}
+
+.filter output.year {
+  display: inline-block;
+  width: 3em;
+  text-align: center;
+  font-size: 1em;
+  color: black;
+}
+
+.filter .members-container,
+.filter .range-container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.filter .members-container label {
+  font-size: 1em;
+  color: black;
+}
+
+.filter .members-container input[type="checkbox"] {
+  margin-right: 0.5em;
+}
+
+.filter .select {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.filter .select label {
+  font-size: 1em;
+  color: black;
+}
+
+.filter .select select {
+  padding: 0.5em;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 1em;
+  margin-top: 0.5em;
+}
+
+.findButton {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 1.2em;
+  margin-top: 1em;
+  display: inline-block;
+}
+
+.findButton:hover {
+  background-color: darkgray;
+  transition: 0.5s;
+}
+
+/* -------------search style----------------- */
+
 .search {
   display: flex;
   justify-content: center;
@@ -55,6 +156,8 @@ body {
 
 }
 
+/* -----------------content style------------- */
+
 .container {
   display: flex;
   justify-content: center;
@@ -64,13 +167,13 @@ body {
   transition: filter 0.1s ease;
 }
 
-.container:hover .item{
+/* .container:hover .item{
   filter: blur(100px);
 }
 
 .container .item:hover {
   filter: none;
-}
+} */
 
 .notfound {
   border: 4px solid black;
@@ -124,6 +227,13 @@ body {
 }
 
 @media (max-width: 768px) {
+  .filter {
+    padding: 1em;
+  }
+
+  .filter input[type="range"] {
+    width: calc(100% - 1em);
+  }
   .search-form {
     flex-direction: column;
     align-items: stretch;
@@ -141,6 +251,15 @@ body {
 }
 
 @media (max-width: 480px) {
+  .filter .members label,
+  .filter .select label {
+    font-size: 0.9em;
+  }
+
+  .findButton {
+    font-size: 1em;
+    padding: 0.5em;
+  }
   .item {
     flex: 1 1 100%;
   }
@@ -149,3 +268,5 @@ body {
     font-size: medium;
   }
 }
+
+
