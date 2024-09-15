@@ -1,11 +1,5 @@
-* {
-  font-family: "Bebas Neue", sans-serif;
-  font-weight: 700;
-  font-style: oblique;
-  box-sizing: border-box; 
-}
-
 body {
+  font-family: Georgia, 'Times New Roman', Times, serif;
   margin: 0;
   background-image: url(XbackHome.jpg);
   background-size: cover;
@@ -31,8 +25,7 @@ body {
 }
 
 .search-label {
-  font-size: 1.2em; 
-  font-weight: 700;
+  font-size: 1.2em;
   color: black;
   margin-right: 1em;
 }
@@ -58,7 +51,8 @@ body {
 
 .search-button:hover {
   background-color: darkgray;
-  transform: translateY(2px);
+  transition: 0.5s;
+
 }
 
 .container {
@@ -67,10 +61,18 @@ body {
   flex-wrap: wrap;
   gap: 2em;
   padding: 1em;
+  transition: filter 0.1s ease;
+}
+
+.container:hover .item{
+  filter: blur(100px);
+}
+
+.container .item:hover {
+  filter: none;
 }
 
 .notfound {
-  background-color: #f7eee5;
   border: 4px solid black;
   padding: 2em;
   border-radius: 10px;
@@ -80,13 +82,14 @@ body {
 }
 
 .item {
-  background-color: #f7eee5;
+  background-color: #ffffff;
   border: 4px solid black;
   padding: 1em;
   border-radius: 10px;
   text-align: center;
   flex: 1 1 calc(25% - 2em);
   box-sizing: border-box;
+  transition: filter 0.3s ease;
 }
 
 .item:hover {
@@ -109,8 +112,9 @@ body {
 }
 
 .button:hover {
-  transform: translateY(5px);
-  box-shadow: 0 4px 6px rgba(255, 0, 0, 0.6);
+  transform: translateY(-5px);
+  transition: 0.3s;
+  box-shadow: 0 4px 6px rgba(63, 63, 63, 0.6);
 }
 
 .btn {
